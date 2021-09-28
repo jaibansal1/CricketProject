@@ -1,5 +1,5 @@
 # CricketProject
-## CS 4278 Project ##
+## CS 4278 / Principles of Software Engineering ##
 
 ### **Contributors**: Abir Mazumder, Anshul Joshi, Jai Bansal ###
 
