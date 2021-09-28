@@ -1,5 +1,7 @@
 # CricketProject
-CS 4278 Project
+## CS 4278 Project ##
+
+### **Contributors**: Abir Mazumder, Anshul Joshi, Jai Bansal ###
 
 **Project Overview**: This project is a roster and event management web-based application designed for club sports (specifically club cricket) at Vanderbilt University. Users will be split into two segments: administrators (team captains) and users (team players).
 
