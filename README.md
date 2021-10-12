@@ -13,6 +13,6 @@
 
 **Design Prototypes**:
 
-We used Figma to design the pages and components of our web app and used its prototyping tool to show relationships between different pages and types of user interaction on our app. Our designs and prototyping can be viewed here: https://www.figma.com/file/nlOfJQo7rmaynAPDKaIBwK/VCC-All-Pages?node-id=0%3A1
+We used Figma to design the pages and components of our web app and used its prototyping tool to show relationships between different pages and types of user interaction on our app. Our designs and prototyping can be viewed [here](https://www.figma.com/file/nlOfJQo7rmaynAPDKaIBwK/VCC-All-Pages?node-id=0%3A1 "Figma Link")
 
 
