@@ -11,7 +11,7 @@ import PasswordReset from "./PasswordReset";
 
 function Application() {
   //   const user = useContext(UserContext);
-  const user = true;
+  const user = false;
   return user ? (
     <Router>
       <Switch>
