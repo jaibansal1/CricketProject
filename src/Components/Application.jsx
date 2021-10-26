@@ -10,7 +10,7 @@ import { useAuth } from "../Providers/AuthProvider";
 
 function Application() {
   //   const { user } = useAuth();
-  const user = true;
+  const user = false;
   return user ? (
     <Router>
       <Switch>
