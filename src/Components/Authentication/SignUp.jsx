@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth, generateUserDocument, firestore } from "../firebase";
+import { auth, generateUserDocument, firestore } from "../../Services/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import Avatar from "@mui/material/Avatar";
@@ -17,6 +17,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useAuth } from "../../Providers/AuthProvider";
 
 function Copyright(props) {
   return (
@@ -47,7 +48,8 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState(null);
-  const [selectedValue, setSelectedValue] = useState('a');
+  const [selectedValue, setSelectedValue] = useState("a");
+  const { user, login, logout } = useAuth();
 
   const createUserWithEmailAndPasswordHandler = async (
     event,
@@ -271,12 +273,13 @@ const SignUp = () => {
                 </Grid>
               </RadioGroup>
             </FormControl>
-           
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={login}
             >
               Sign Up
             </Button>

@@ -1,0 +1,27 @@
+{
+    "uid": "XPgyfBfzZMaHPcF39qklzRGSCoZ2",
+    "email": "abirmazumder1999@gmail.com",
+    "emailVerified": true,
+    "displayName": "Abir Mahmud",
+    "isAnonymous": false,
+    "photoURL": "https://lh3.googleusercontent.com/a-/AOh14Gi0Q48os1xZfRuSMXmSHMqQuX2x6g_DjsLDClj6NA=s96-c",
+    "providerData": [
+        {
+            "providerId": "google.com",
+            "uid": "114506609989685505294",
+            "displayName": "Abir Mahmud",
+            "email": "abirmazumder1999@gmail.com",
+            "phoneNumber": null,
+            "photoURL": "https://lh3.googleusercontent.com/a-/AOh14Gi0Q48os1xZfRuSMXmSHMqQuX2x6g_DjsLDClj6NA=s96-c"
+        }
+    ],
+    "stsTokenManager": {
+        "refreshToken": "AFxQ4_pz751fYNF-jlEEKYz7DUdOyePZOR_Oz9BZenpPGYnk1hrthJs3vrSWS2AMdj_ukNmQzgoB4V9qyQIXkHDb6SVkO32b1XJV1s7nZgXmd6MpnCC0c_unKb_-nLglvIlq3Ed7O65hnGMj_mvRlD0DAhjQykoNLMu8mJu2TBQ9rqM3h81YmHVp3GUEy4-L0ThhySmWutN6pP6o7nSaJpZBGrnnBl4Owo3Zhw6-z7UKc3HoFvH-oSbTes54xjN4SGS7P8DoV22BVkiuEFjOkiV89kdwCSRF1pM1MMvL3cY5XyPiTwapI1f-4oxYxwRdK16B2lRsCHIB8LwV3-Ys3EwqKOPJpHZ5Ef9uNG2aljQPhYmDbbgPlCJZMtA-KeoR84Qj_-YF4slpL3oeZBavAWI0-ol0Hfm72fHoiT-5xOeuxbU-WfFCewsFCTZFQ0K980yvT31CfKLp",
+        "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjhmYmRmMjQxZTdjM2E2NTEzNTYwNmRkYzFmZWQyYzU1MjI2MzBhODciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiQWJpciBNYWhtdWQiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2kwUTQ4b3MxeFpmUnVTTVhtU0hNcVF1WDJ4NmdfRGpzTERDbGo2TkE9czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY3JpY2tldC1wcm9qZWN0LWNlOTU4IiwiYXVkIjoiY3JpY2tldC1wcm9qZWN0LWNlOTU4IiwiYXV0aF90aW1lIjoxNjM1MjM5NDQyLCJ1c2VyX2lkIjoiWFBneWZCZnpaTWFIUGNGMzlxa2x6UkdTQ29aMiIsInN1YiI6IlhQZ3lmQmZ6Wk1hSFBjRjM5cWtselJHU0NvWjIiLCJpYXQiOjE2MzUyMzk0NDIsImV4cCI6MTYzNTI0MzA0MiwiZW1haWwiOiJhYmlybWF6dW1kZXIxOTk5QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE0NTA2NjA5OTg5Njg1NTA1Mjk0Il0sImVtYWlsIjpbImFiaXJtYXp1bWRlcjE5OTlAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.Vp0XCtdhme2-Ad9M0yzJFQs_h0prfU5PbdjRPKiP0i6JM91DVCY8m1_rrm_wYJCLexcuMPWT5L40JGyV4H6Ajl_qyekPKBEy3z-7PogMw21hdGr4mlgMgS9wHEyPXyWIxvY1Jt1yk4HiFS-DSsN3HBlUxqV3JIwds4YfFrvJO4geI10-gwfi3AABC-fg3dX_VXKdX2U9aJRe47sLfzy4x8W9wHJb6h287xOPd1UMsON2lJAB60U0xlBFpYbJggHsYu0AeLpzoW0BdKigyL0O3BTSzhCxtl9pijzKaxz2PvOEP0VOYgxbEymB7bVt2ZM1ci4sVEvBGrIk6r1RgMcoiw",
+        "expirationTime": 1635243042634
+    },
+    "createdAt": "1635238984137",
+    "lastLoginAt": "1635238984137",
+    "apiKey": "AIzaSyDA5rpsXgLJkNyRyttYmH4SMiB1CKdO1SA",
+    "appName": "[DEFAULT]"
+}

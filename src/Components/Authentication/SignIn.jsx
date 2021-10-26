@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "@firebase/auth";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useAuth } from "../../Providers/AuthProvider";
 
 function Copyright(props) {
   return (
@@ -42,14 +41,15 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const { user, login, logout } = useAuth();
 
-  const signInWithEmailAndPasswordHandler = (event, email, password) => {
-    event.preventDefault();
-    signInWithEmailAndPassword(auth, email, password).catch((error) => {
-      setError("Error signing in with password and email!");
-      console.error("Error signing in with password and email", error);
-    });
-  };
+  // const signInWithEmailAndPasswordHandler = (event, email, password) => {
+  //   event.preventDefault();
+  //   signInWithEmailAndPassword(auth, email, password).catch((error) => {
+  //     setError("Error signing in with password and email!");
+  //     console.error("Error signing in with password and email", error);
+  //   });
+  // };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -182,6 +182,7 @@ const SignIn = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={login}
             >
               Sign In
             </Button>

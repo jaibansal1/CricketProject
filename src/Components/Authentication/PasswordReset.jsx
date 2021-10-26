@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "../firebase";
+// import { auth } from "../firebase";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,7 +16,7 @@ const PasswordReset = () => {
   const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
   const [error, setError] = useState(null);
 
-  const onChangeHandler = event => {
+  const onChangeHandler = (event) => {
     const { name, value } = event.currentTarget;
 
     if (name === "userEmail") {
@@ -24,18 +24,20 @@ const PasswordReset = () => {
     }
   };
 
-  const sendResetEmail = event => {
-    event.preventDefault();
-    auth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-          setEmailHasBeenSent(true);
-        setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
-      })
-      .catch(() => {
-        setError("Error resetting password");
-      });
-  };
+  // const sendResetEmail = (event) => {
+  //   event.preventDefault();
+  //   auth
+  //     .sendPasswordResetEmail(email)
+  //     .then(() => {
+  //       setEmailHasBeenSent(true);
+  //       setTimeout(() => {
+  //         setEmailHasBeenSent(false);
+  //       }, 3000);
+  //     })
+  //     .catch(() => {
+  //       setError("Error resetting password");
+  //     });
+  // };
 
   return (
     // <div className="mt-8">
@@ -105,7 +107,7 @@ const PasswordReset = () => {
           <Box
             component="form"
             z
-            onSubmit={sendResetEmail}
+            // onSubmit={sendResetEmail}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -119,7 +121,7 @@ const PasswordReset = () => {
               autoComplete="email"
               autoFocus
             />
-           
+
             <Button
               type="submit"
               fullWidth
@@ -136,5 +138,3 @@ const PasswordReset = () => {
 };
 
 export default PasswordReset;
-
-
