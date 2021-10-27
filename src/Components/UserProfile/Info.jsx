@@ -13,13 +13,10 @@ function preventDefault(event) {
 export default function Info() {
   return (
     <React.Fragment>
-      <Title>Player Info</Title>
+      <Box sx={{ mx:"auto", my:1}}><Title>Player Info</Title></Box>
       <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <nav aria-label="main mailbox folders">
         <List>
-          <ListItem disablePadding>
-            <ListItemText primary="Opu Poro" />
-          </ListItem>
           <ListItem disablePadding>
             <ListItemText primary="Sophomore" />
           </ListItem>
