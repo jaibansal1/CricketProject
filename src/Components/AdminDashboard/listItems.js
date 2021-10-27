@@ -11,26 +11,28 @@ import Link from "@mui/material/Link";
 
 export const mainListItems = (
   <div>
-    <ListItem button>
     <Link href="/AdminDashboard" underline = "none">
+      <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Roster" /></Link>
+      <ListItemText primary="Roster" />
     </ListItem>
-    <ListItem button>
-      <Link href="/EventCalendar" underline = "none">
+    </Link>
+    <Link href="/EventCalendar" underline = "none">
+      <ListItem button>
       <ListItemIcon>
         <CalendarTodayIcon />
       </ListItemIcon>
-      <ListItemText primary="Event Calendar" /></Link>
+      <ListItemText primary="Event Calendar" />
     </ListItem>
-    <ListItem button>
-      <Link href="/UserProfile" underline = "none">
+    </Link>
+    <Link href="/UserProfile" underline = "none"><ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Profile Page" /></Link>
+      <ListItemText primary="Profile Page" />
     </ListItem>
+    </Link>
   </div>
 );
