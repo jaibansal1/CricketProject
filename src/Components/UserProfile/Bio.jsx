@@ -2,6 +2,7 @@ import * as React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Title from './Title';
+import Box from '@mui/material/Box';
 import { Text } from 'recharts';
 
 function preventDefault(event) {
@@ -11,7 +12,7 @@ function preventDefault(event) {
 export default function Bio() {
   return (
     <React.Fragment>
-      <Title>Player Bio</Title>
+      <Box sx={{ mx:"auto", my:1}}><Title>Player Bio</Title></Box>
       {/* <Typography component="p" variant="h4">
         $3,024.00
       </Typography>

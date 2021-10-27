@@ -15,9 +15,9 @@ function preventDefault(event) {
 export default function AvatarCard() {
   return (
     <React.Fragment>
-      <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-      <Title>Opu Poro</Title>
-      <Title>Batting Allrounder</Title>
+      <Avatar sx={{ height: 60, width: 60, mx:"auto", my:3, gcolor: deepPurple[500] }}>OP</Avatar>
+      <Box sx={{ mx:"auto", my:0.6}}><Title>Opu Poro</Title></Box>
+      <Box sx={{ mx:"auto", my:0.6}}><Title>Batting Allrounder</Title></Box>
     </React.Fragment>
   );
 }
