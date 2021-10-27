@@ -31,6 +31,9 @@ import { mainListItems } from "./listItems";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
+import Cal from "./Cal";
+
+
 
 function Copyright(props) {
   return (
@@ -229,6 +232,7 @@ function RosterAdminView() {
             overflow: "auto",
           }}
         >
+           <Cal/>
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
@@ -246,5 +250,6 @@ function RosterAdminView() {
 const AdminDashboard = () => {
   return <RosterAdminView />;
 };
+
 
 export default AdminDashboard;
