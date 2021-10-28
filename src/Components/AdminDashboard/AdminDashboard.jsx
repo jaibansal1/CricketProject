@@ -26,7 +26,7 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "./listItems";
+import { mainListItems } from "../Static/listItems";
 import AvatarCard from "./AvatarCard";
 
 import Avatar from "@mui/material/Avatar";

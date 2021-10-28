@@ -13,7 +13,7 @@ function Application() {
   return user ? (
     <Router>
       <Switch>
-        <Route exact path="/userProfile">
+        <Route exact path="/">
           <UserProfile />
         </Route>
         <Route exact path="/userDashboard">

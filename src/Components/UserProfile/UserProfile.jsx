@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "./listItems";
+import { mainListItems } from "../Static/listItems";
 import AvatarCard from "./AvatarCard";
 import Bio from "./Bio";
 import Info from "./Info";

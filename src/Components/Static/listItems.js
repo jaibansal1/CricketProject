@@ -1,4 +1,3 @@
-import * as React from "react";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -25,7 +24,7 @@ export const mainListItems = (
         <ListItemText primary="Event Calendar" />
       </ListItem>
     </Link>
-    <Link href="/UserProfile" underline="none">
+    <Link href="/" underline="none">
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon />
