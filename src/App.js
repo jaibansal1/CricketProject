@@ -1,4 +1,3 @@
-import React from "react";
 import Application from "./Components/Application";
 import { AuthProvider } from "./Providers/AuthProvider";
 

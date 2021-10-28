@@ -5,12 +5,11 @@ import UserProfile from "./UserProfile/UserProfile";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import UserDashboard from "./UserDashboard/UserDashboard";
 import EventCalendar from "./EventCalendar/EventCalendar";
-import PasswordReset from "./Authentication/PasswordReset";
 import { useAuth } from "../Providers/AuthProvider";
 
 function Application() {
-  //   const { user } = useAuth();
-  const user = true;
+  const { user } = useAuth();
+  // const user = false;
   return user ? (
     <Router>
       <Switch>
@@ -34,10 +33,7 @@ function Application() {
         <Route exact path="/signUp">
           <SignUp />
         </Route>
-        <Route path="/passwordReset">
-          <PasswordReset />
-        </Route>
-        <Route path="/">
+        <Route exact path="/">
           <SignIn />
         </Route>
       </Switch>
