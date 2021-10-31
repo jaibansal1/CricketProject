@@ -1,14 +1,7 @@
-import React, { useContext } from "react";
-import {
-  styled,
-  createTheme,
-  ThemeProvider,
-  alpha,
-} from "@mui/material/styles";
+import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -18,8 +11,6 @@ import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 
@@ -27,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "../Static/listItems";
-import AvatarCard from "./AvatarCard";
+import AvatarCard from "../Static/AvatarCard";
 
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
@@ -43,7 +34,7 @@ import {
 
 const mdTheme = createTheme();
 
-function RosterAdminView() {
+const RosterAdminView = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -171,7 +162,7 @@ function RosterAdminView() {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 const AdminDashboard = () => {
   return <RosterAdminView />;

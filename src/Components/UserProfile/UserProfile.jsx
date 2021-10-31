@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "../Static/listItems";
-import AvatarCard from "./AvatarCard";
+import AvatarCard from "../Static/AvatarCard";
 import Bio from "./Bio";
 import Info from "./Info";
 import Orders from "./Orders";
@@ -35,7 +35,7 @@ import {
 } from "../StyledComponents/StyledComponents";
 const mdTheme = createTheme();
 
-function DashboardContent() {
+const DashboardContent = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -175,7 +175,7 @@ function DashboardContent() {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 const UserProfile = () => {
   // const user = useContext(UserContext);

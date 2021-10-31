@@ -8,8 +8,8 @@ import EventCalendar from "./EventCalendar/EventCalendar";
 import { useAuth } from "../Providers/AuthProvider";
 
 function Application() {
-  const { user } = useAuth();
-  // const user = false;
+  // const { user } = useAuth();
+  const user = true;
   return user ? (
     <Router>
       <Switch>

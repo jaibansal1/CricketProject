@@ -26,7 +26,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "../Static/listItems";
-import AvatarCard from "./AvatarCard";
+import AvatarCard from "../Static/AvatarCard";
 
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
@@ -42,7 +42,7 @@ import {
 
 const mdTheme = createTheme();
 
-function RosterUserView() {
+const RosterUserView = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -168,7 +168,7 @@ function RosterUserView() {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 const UserDashboard = () => {
   return <RosterUserView />;

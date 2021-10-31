@@ -5,7 +5,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Title from "./Title";
+import Title from "../Static/Title";
 
 // Generate Order Data
 function createData(id, type, innings, runs, avg, sr, hs) {
@@ -22,7 +22,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders() {
+const Orders = () => {
   return (
     <React.Fragment>
       <Title>Player Stats</Title>
@@ -55,4 +55,5 @@ export default function Orders() {
       </Link>
     </React.Fragment>
   );
-}
+};
+export default Orders;

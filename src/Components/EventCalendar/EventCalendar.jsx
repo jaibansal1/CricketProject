@@ -33,7 +33,7 @@ import {
 
 const mdTheme = createTheme();
 
-function RosterAdminView() {
+const RosterAdminView = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -131,7 +131,7 @@ function RosterAdminView() {
       </Box>
     </ThemeProvider>
   );
-}
+};
 
 const AdminDashboard = () => {
   return <RosterAdminView />;
