@@ -21,10 +21,9 @@ import Copyright from "../Static/Copyright";
 const theme = createTheme();
 
 const SignUp = () => {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [error, setError] = useState(null);
   const [selectedValue, setSelectedValue] = useState("");
   const { user, login } = useAuth();
 
@@ -45,7 +44,7 @@ const SignUp = () => {
     } else if (name === "userPassword") {
       setPassword(value);
     } else if (name === "displayName") {
-      setDisplayName(value);
+      setFullName(value);
     } else {
       setSelectedValue(event.target.value);
     }

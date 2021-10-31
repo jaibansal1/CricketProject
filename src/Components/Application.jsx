@@ -6,10 +6,13 @@ import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import UserDashboard from "./UserDashboard/UserDashboard";
 import EventCalendar from "./EventCalendar/EventCalendar";
 import { useAuth } from "../Providers/AuthProvider";
+import { createBrowserHistory, createHashHistory } from "history";
 
 function Application() {
-  // const { user } = useAuth();
-  const user = true;
+  const { user } = useAuth();
+  // const user = true;
+  // const history = createHashHistory();
+
   return user ? (
     <Router>
       <Switch>
@@ -39,13 +42,6 @@ function Application() {
       </Switch>
     </Router>
   );
-  // <div>
-  //   <p>{JSON.stringify(user, null, 5)}</p>
-  //   <div>
-  //     <button onClick={login}>Login</button>
-  //     <button onClick={logout}>Logout</button>
-  //   </div>
-  // </div>
 }
 
 export default Application;

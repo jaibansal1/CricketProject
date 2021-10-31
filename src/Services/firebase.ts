@@ -27,9 +27,10 @@ if (getApps().length) {
 } else {
   app = initializeApp(firebaseConfig);
 }
-export default app;
+const db = getFirestore();
+
+export {app, db};
 // export const auth = getAuth();
-// export const firestore = getFirestore();
 
 // const provider = new GoogleAuthProvider();
 // // export const signInWithGoogle = () => {
