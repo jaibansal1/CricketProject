@@ -16,13 +16,13 @@ import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../Static/listItems";
+import { mainListItems } from "../GlobalComponents/listItems";
 
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
 import Cal from "./Cal";
-import Copyright from "../Static/Copyright";
+import Copyright from "../GlobalComponents/Copyright";
 import {
   AppBar,
   Drawer,

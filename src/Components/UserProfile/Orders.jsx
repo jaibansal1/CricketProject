@@ -5,7 +5,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Title from "../Static/Title";
+import Title from "../GlobalComponents/Title";
 
 // Generate Order Data
 function createData(id, type, innings, runs, avg, sr, hs) {

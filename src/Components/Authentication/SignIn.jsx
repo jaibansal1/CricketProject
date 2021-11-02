@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../Providers/AuthProvider";
-import Copyright from "../Static/Copyright";
+import Copyright from "../GlobalComponents/Copyright";
 const theme = createTheme();
 
 const SignIn = () => {

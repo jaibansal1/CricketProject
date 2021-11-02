@@ -32,11 +32,6 @@ const db = getFirestore();
 export {app, db};
 // export const auth = getAuth();
 
-// const provider = new GoogleAuthProvider();
-// // export const signInWithGoogle = () => {
-// //   signInWithPopup(provider);
-// // };
-
 // const getUserDocument = async (uid) => {
 //   if (!uid) return null;
 //   try {

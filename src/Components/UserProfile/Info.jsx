@@ -1,5 +1,5 @@
 import * as React from "react";
-import Title from "../Static/Title";
+import Title from "../GlobalComponents/Title";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";

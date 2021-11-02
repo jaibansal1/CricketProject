@@ -25,13 +25,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../Static/listItems";
-import AvatarCard from "../Static/AvatarCard";
+import { mainListItems } from "../GlobalComponents/listItems";
+import AvatarCard from "../GlobalComponents/AvatarCard";
 
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
-import Copyright from "../Static/Copyright";
+import Copyright from "../GlobalComponents/Copyright";
 import {
   AppBar,
   Drawer,
