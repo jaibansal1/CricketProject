@@ -32,14 +32,19 @@ const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
+  const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
-
+  const adminRef = db.collection("admin");
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        const userSnap = await db.doc(`users/${user.uid}`).get();
+        setUserData(userSnap.data());
+        setLoading(false);
       } else {
         setUser(null);
+        setLoading(false);
       }
     });
     return unsubscribe;
@@ -58,8 +63,24 @@ const AuthProvider = ({ children }) => {
           accountType,
         };
         const usersRef = db.collection("users");
-        // usersRef.
+        usersRef
+          .doc(userInfo.uid)
+          .set(data)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
       });
+      if (accountType === "admin") {
+        adminRef
+          .doc()
+          .set({
+            id: userInfo.uid,
+            email: userInfo.email,
+            fullName: userInfo.displayName,
+            photoURL: userInfo.photoURL,
+            accountType,
+          })
+          .catch((err) => console.log(err));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +93,7 @@ const AuthProvider = ({ children }) => {
     }
   };
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, userData, login, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );
