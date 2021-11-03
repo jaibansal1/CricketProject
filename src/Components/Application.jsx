@@ -4,6 +4,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react";
+
 import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
 import UserProfile from "./UserProfile/UserProfile";
@@ -16,8 +18,8 @@ import { app, db } from "../Services/firebase";
 
 function Application() {
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
-  // const user = true;
+  // const { user } = useAuth();
+  const user = true;
   // const history = createHashHistory();
 
   // NOT SURE IF THIS IS REQUIRED

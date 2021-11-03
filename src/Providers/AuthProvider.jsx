@@ -7,6 +7,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  getDoc,
+  getDocs,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 import { app, db } from "../Services/firebase";
 // import { auth, generateUserDocument } from "../firebase";
 // import { onAuthStateChanged } from "@firebase/auth";
@@ -33,13 +41,14 @@ const useAuth = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [userData, setUserData] = useState();
+
   const [loading, setLoading] = useState(true);
-  const adminRef = db.collection("admin");
+  const adminRef = collection(db, "admin");
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        const userSnap = await db.doc(`users/${user.uid}`).get();
+        const userSnap = db.doc(`users/${user.uid}`).get();
         setUserData(userSnap.data());
         setLoading(false);
       } else {
@@ -62,25 +71,25 @@ const AuthProvider = ({ children }) => {
           photoURL: userInfo.photoURL,
           accountType,
         };
-        const usersRef = db.collection("users");
+        const usersRef = collection(db, "users");
         usersRef
           .doc(userInfo.uid)
           .set(data)
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
       });
-      if (accountType === "admin") {
-        adminRef
-          .doc()
-          .set({
-            id: userInfo.uid,
-            email: userInfo.email,
-            fullName: userInfo.displayName,
-            photoURL: userInfo.photoURL,
-            accountType,
-          })
-          .catch((err) => console.log(err));
-      }
+      // if (accountType === "admin") {
+      //   adminRef
+      //     .doc()
+      //     .set({
+      //       id: userInfo.uid,
+      //       email: userInfo.email,
+      //       fullName: userInfo.displayName,
+      //       photoURL: userInfo.photoURL,
+      //       accountType,
+      //     })
+      //     .catch((err) => console.log(err));
+      // }
     } catch (error) {
       console.log(error);
     }
