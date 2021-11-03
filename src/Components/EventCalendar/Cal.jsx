@@ -44,6 +44,12 @@ const Cal = () => {
 
   function handleAddEvent() {
     setAllEvents([...allEvents, newEvent]);
+    const eventsRef = db.collection("events");
+    eventsRef
+      .doc("s7lDDn8fdetgwkTuoC2r")
+      .set(events)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 
   return (

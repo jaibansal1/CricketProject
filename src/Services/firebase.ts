@@ -13,13 +13,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // import { } from 'firebase/<service>';
 let app: FirebaseApp;
 const firebaseConfig = {
-  apiKey: "AIzaSyDA5rpsXgLJkNyRyttYmH4SMiB1CKdO1SA",
-  authDomain: "cricket-project-ce958.firebaseapp.com",
-  projectId: "cricket-project-ce958",
-  storageBucket: "cricket-project-ce958.appspot.com",
-  messagingSenderId: "138097516988",
-  appId: "1:138097516988:web:ed34df205649f1514ccbb9",
-  measurementId: "G-SMRPYEHDWP",
+  apiKey: "AIzaSyB5wQgqLLDBfeHMua4DU1sGgOCotAVqFFA",
+  authDomain: "cricket-project-69765.firebaseapp.com",
+  projectId: "cricket-project-69765",
+  storageBucket: "cricket-project-69765.appspot.com",
+  messagingSenderId: "873352753867",
+  appId: "1:873352753867:web:0dbeea3271126c8cc0e14e",
+  measurementId: "G-F6X3JZRY4R"
 };
 // Initialize Firebase
 if (getApps().length) {
