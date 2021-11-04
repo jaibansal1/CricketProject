@@ -17,7 +17,7 @@ const theme = createTheme();
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const login  = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
@@ -35,7 +35,7 @@ const SignIn = () => {
             src="../../Assets/cricAvatar.jpg"
             sx={{ m: 1, bgcolor: "secondary.main" }}
           />
-          <Typography variant="h4" component="div" gutterBottom>
+          <Typography variant="h4" component="div" gutterBottom data-testid="login header">
             Log In to VCC
           </Typography>
           <Typography variant="subtitle1" gutterBottom component="div">
