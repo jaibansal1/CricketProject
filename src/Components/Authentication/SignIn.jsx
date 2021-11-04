@@ -39,7 +39,7 @@ const SignIn = () => {
           <Typography variant="h4" component="div" gutterBottom data-testid="login header">
             Log In to VCC
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography variant="subtitle1" gutterBottom component="div" data-testid="login subheader">
             Google Sign In
           </Typography>
           <Box
@@ -62,6 +62,8 @@ const SignIn = () => {
               autoComplete="email"
               autoFocus
               onChange={(event) => setEmail(event.target.value)}
+              inputProps={{ "data-testid": "email-field" }}
+              //data-testid="emailcheck"
             />
             {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
             <TextField
@@ -77,6 +79,7 @@ const SignIn = () => {
               id="password"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
+              inputProps={{ "data-testid": "password-field" }}
             />
             <Button
             
@@ -87,6 +90,7 @@ const SignIn = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => login(email, password)}
+              data-testid="signin-submit"
             >
               Sign In
             </Button>

@@ -3,20 +3,29 @@ import ReactDOM from 'react-dom';
 import SignIn from '../SignIn';
 import userEvent from '@testing-library/user-event'
 import {render, screen, cleanup} from '@testing-library/react'
+import "@testing-library/jest-dom/extend-expect"
 
-
+// Test page renders without crashing
 test ("renders without crashing", ()=>{
     const div = document.createElement("div");
     ReactDOM.render(<SignIn></SignIn>, div);
 })
 
-// test ("has correct login text", ()=>{
+// Test page renders default SignIn state
+test("renders default state", () => {
+    const { getByTestId } = render(<SignIn />);
+    const password = getByTestId("password-field");
+    const email = getByTestId("email-field");  
+    const submit = getByTestId("signin-submit");
+    
+    expect(password.value).toBe("");
+    expect(email.value).toBe("");
+    expect(submit).toHaveStyle({
+        marginTop: 3,
+        marginBottom: 2,
+      })
 
-//     render(<SignIn email="test@gmail.com" password="testpass" />)
-//     expect(screen.getByRole('Email Address')).toHaveValue("")
-
-// })
-
+})   
 
 // test presence of correct welcome text
 test('has correct welcome text', () => {
@@ -85,6 +94,11 @@ test("renders default state", () => {
 
 })
 
+// Test presence of correct welcome text
+test('Displays welcome text', () => {
+    render(<SignIn></SignIn>)
+    expect(screen.getByTestId('login header')).toHaveTextContent('Log In to VCC')
+  })
 
 // Test email input field exists
 test('Email input exists', () => {
@@ -118,8 +132,3 @@ it("enables submit when form is filled out", () => {
     expect(submit).not.toHaveClass("Mui-disabled");
 
 });
-    
-
-
-
-
