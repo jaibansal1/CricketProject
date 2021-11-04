@@ -1,23 +1,36 @@
-import { useState } from "react";
+import React, { useState } from "react";
+// import { auth } from "../firebase";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../Providers/AuthProvider";
-import Copyright from "../GlobalComponents/Copyright";
-import TextField from "@mui/material/TextField";
 
 const theme = createTheme();
 
-const SignIn = () => {
+const PasswordReset = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
+  const { resetPassword } = useAuth();
+
+  // const sendResetEmail = (event) => {
+  //   event.preventDefault();
+  //   auth
+  //     .sendPasswordResetEmail(email)
+  //     .then(() => {
+  //       setEmailHasBeenSent(true);
+  //       setTimeout(() => {
+  //         setEmailHasBeenSent(false);
+  //       }, 3000);
+  //     })
+  //     .catch(() => {
+  //       setError("Error resetting password");
+  //     });
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,21 +44,18 @@ const SignIn = () => {
             alignItems: "center",
           }}
         >
-          <Avatar
-            src="../../Assets/cricAvatar.jpg"
-            sx={{ m: 1, bgcolor: "secondary.main" }}
-          />
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography variant="h4" component="div" gutterBottom>
-            Log In to VCC
+            Forgot Password?
           </Typography>
           <Typography variant="subtitle1" gutterBottom component="div">
-            Google Sign In
+            Enter your email below
           </Typography>
           <Box
             component="form"
+            // onSubmit={sendResetEmail}
             noValidate
             sx={{ mt: 1 }}
-            onSubmit={() => login(email, password)}
           >
             <TextField
               margin="normal"
@@ -56,46 +66,22 @@ const SignIn = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(event) => setEmail(event.target.value)}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={(event) => setPassword(event.target.value)}
-            />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => login(email, password)}
+              onClick={() => resetPassword(email)}
             >
-              Sign In
+              Reset Password
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/passwordReset" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signUp" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
 };
 
-export default SignIn;
+export default PasswordReset;

@@ -8,6 +8,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
+import PasswordReset from "./Authentication/PasswordReset";
 import UserProfile from "./UserProfile/UserProfile";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import UserDashboard from "./UserDashboard/UserDashboard";
@@ -18,8 +19,8 @@ import { app, db } from "../Services/firebase";
 
 function Application() {
   const [loading, setLoading] = useState(true);
-  // const { user } = useAuth();
-  const user = true;
+  const { user } = useAuth();
+  // const user = true;
   // const history = createHashHistory();
 
   // NOT SURE IF THIS IS REQUIRED
@@ -79,6 +80,9 @@ function Application() {
         </Route>
         <Route exact path="/signIn">
           <SignIn />
+        </Route>
+        <Route exact path="/passwordReset">
+          <PasswordReset />
         </Route>
       </Switch>
     </Router>

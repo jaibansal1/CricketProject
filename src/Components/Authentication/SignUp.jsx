@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { auth, generateUserDocument, firestore } from "../../Services/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -17,38 +15,18 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../Providers/AuthProvider";
 import Copyright from "../GlobalComponents/Copyright";
+import TextField from "@mui/material/TextField";
 
 const theme = createTheme();
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
-  const { user, login } = useAuth();
+  const [accountType, setAccountType] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-  const onChangeHandler = (event) => {
-    const { name, value } = event.currentTarget;
-
-    if (name === "userEmail") {
-      setEmail(value);
-    } else if (name === "userPassword") {
-      setPassword(value);
-    } else if (name === "displayName") {
-      setFullName(value);
-    } else {
-      setSelectedValue(event.target.value);
-    }
-  };
+  const { register } = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,15 +44,14 @@ const SignUp = () => {
           <Typography variant="h4" component="div" gutterBottom>
             Sign Up for VCC
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Google Sign Up
-          </Typography>
+
           <Box
             component="form"
-            z
-            onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
+            onSubmit={() =>
+              register(firstName, lastName, email, password, accountType)
+            }
           >
             <FormControl component="fieldset">
               <FormLabel component="legend">ACCOUNT TYPE</FormLabel>
@@ -82,8 +59,8 @@ const SignUp = () => {
                 row
                 aria-label="accountType"
                 name="row-radio-buttons-group"
-                value={selectedValue}
-                onChange={onChangeHandler}
+                value={accountType}
+                onChange={(event) => setAccountType(event.target.value)}
               >
                 <Grid container>
                   <Grid item xs>
@@ -103,13 +80,62 @@ const SignUp = () => {
                 </Grid>
               </RadioGroup>
             </FormControl>
-
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                  onChange={(event) => setFirstName(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="lname"
+                  onChange={(event) => setLastName(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </Grid>
+            </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={login}
+              onClick={() =>
+                register(firstName, lastName, email, password, accountType)
+              }
             >
               Sign Up
             </Button>
