@@ -62,7 +62,6 @@ const SignIn = () => {
               autoComplete="email"
               autoFocus
               onChange={(event) => setEmail(event.target.value)}
-              inputProps={{ "data-testid": "email-field" }}
               //data-testid="emailcheck"
             />
             {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
