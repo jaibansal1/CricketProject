@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../Providers/AuthProvider";
 import Copyright from "../GlobalComponents/Copyright";
 import TextField from "@mui/material/TextField";
+import Input from '@mui/material/Input';
 
 const theme = createTheme();
 
@@ -47,8 +48,12 @@ const SignIn = () => {
             sx={{ mt: 1 }}
             onSubmit={() => login(email, password)}
           >
-            <TextField
-              margin="normal"
+            <Input
+              inputProps={{
+                'data-testid': 'email-input'
+              }}
+              placeholder="Enter email"
+              type="email"
               required
               fullWidth
               id="email"
@@ -60,7 +65,11 @@ const SignIn = () => {
               inputProps={{ "data-testid": "email-field" }}
               //data-testid="emailcheck"
             />
+            {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
             <TextField
+              inputProps={{
+                "data-testid": "password-field"
+              }}
               margin="normal"
               required
               fullWidth
@@ -73,6 +82,9 @@ const SignIn = () => {
               inputProps={{ "data-testid": "password-field" }}
             />
             <Button
+            
+              data-testid="signin-submit"
+            
               type="submit"
               fullWidth
               variant="contained"
