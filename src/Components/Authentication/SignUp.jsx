@@ -26,7 +26,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("");
 
-  const { register } = useAuth();
+  const  register  = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
@@ -41,7 +41,7 @@ const SignUp = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-          <Typography variant="h4" component="div" gutterBottom>
+          <Typography variant="h4" component="div" gutterBottom data-testid="signup-header">
             Sign Up for VCC
           </Typography>
 
@@ -61,6 +61,8 @@ const SignUp = () => {
                 name="row-radio-buttons-group"
                 value={accountType}
                 onChange={(event) => setAccountType(event.target.value)}
+                //inputProps={{ "data-testid": "acctype" }}
+                data-testid="acctype"
               >
                 <Grid container>
                   <Grid item xs>
@@ -91,6 +93,7 @@ const SignUp = () => {
                   label="First Name"
                   autoFocus
                   onChange={(event) => setFirstName(event.target.value)}
+                  inputProps={{ "data-testid": "fname-field" }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -102,6 +105,7 @@ const SignUp = () => {
                   name="lastName"
                   autoComplete="lname"
                   onChange={(event) => setLastName(event.target.value)}
+                  inputProps={{ "data-testid": "lname-field" }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -113,7 +117,10 @@ const SignUp = () => {
                   name="email"
                   autoComplete="email"
                   onChange={(event) => setEmail(event.target.value)}
+                  inputProps={{ "data-testid": "email-field" }}
                 />
+                  {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
+
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -125,6 +132,7 @@ const SignUp = () => {
                   id="password"
                   autoComplete="new-password"
                   onChange={(event) => setPassword(event.target.value)}
+                  inputProps={{ "data-testid": "password-field" }}
                 />
               </Grid>
             </Grid>
@@ -136,6 +144,7 @@ const SignUp = () => {
               onClick={() =>
                 register(firstName, lastName, email, password, accountType)
               }
+              data-testid ="submit-button"
             >
               Sign Up
             </Button>
