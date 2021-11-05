@@ -20,35 +20,35 @@ import { app, db } from "../Services/firebase";
 function Application() {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  // const user = true;
-  // const history = createHashHistory();
+  const user = true;
+  const history = createHashHistory();
 
   // NOT SURE IF THIS IS REQUIRED
-  // useEffect(() => {
-  //   const usersRef = db.collection("users");
-  //   const unsubscribe = onAuthStateChanged(auth, (newUser) => {
-  //     if (newUser) {
-  //       usersRef
-  //         .doc(newUser.uid)
-  //         .get()
-  //         .then((document) => {
-  //           const userData = document.data();
-  //           setLoading(false);
-  //           setUser(userData);
-  //         })
-  //         .catch((error) => {
-  //           setLoading(false);
-  //         });
-  //     } else {
-  //       setUser(null);
-  //       setLoading(false);
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    const usersRef = db.collection("users");
+    const unsubscribe = onAuthStateChanged(auth, (newUser) => {
+      if (newUser) {
+        usersRef
+          .doc(newUser.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data();
+            setLoading(false);
+            setUser(userData);
+          })
+          .catch((error) => {
+            setLoading(false);
+          });
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
+    });
+  }, []);
 
-  // if (loading) {
-  //   return <></>;
-  // }
+  if (loading) {
+    return <></>;
+  }
   return user ? (
     <Router>
       <Switch>

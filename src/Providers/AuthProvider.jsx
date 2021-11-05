@@ -17,8 +17,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { app, db } from "../Services/firebase";
-// import { auth, generateUserDocument } from "../firebase";
-// import { onAuthStateChanged } from "@firebase/auth";
+import { auth, generateUserDocument } from "../firebase";
+import { onAuthStateChanged } from "@firebase/auth";
 
 const auth = getAuth(app);
 
@@ -29,7 +29,7 @@ const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
-  // const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
 
   const adminRef = collection(db, "admin");
@@ -61,39 +61,39 @@ const AuthProvider = ({ children }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    // try {
-    //   await signInWithPopup(auth, new GoogleAuthProvider()).then((response) => {
-    //     console.log(JSON.stringify(response, null));
-    //     // const { userInfo } = response.user;
-    //     // const data = {
-    //     //   id: userInfo.uid,
-    //     //   email: userInfo.email,
-    //     //   fullName: userInfo.displayName,
-    //     //   photoURL: userInfo.photoURL,
-    //     //   accountType,
-    //     // };
-    //     // const usersRef = collection(db, "users");
-    //     // usersRef
-    //     //   .doc(userInfo.uid)
-    //     //   .set(data)
-    //     //   .then((res) => console.log(res))
-    //     //   .catch((err) => console.log(err));
-    //   });
-    //   // if (accountType === "admin") {
-    //   //   adminRef
-    //   //     .doc()
-    //   //     .set({
-    //   //       id: userInfo.uid,
-    //   //       email: userInfo.email,
-    //   //       fullName: userInfo.displayName,
-    //   //       photoURL: userInfo.photoURL,
-    //   //       accountType,
-    //   //     })
-    //   //     .catch((err) => console.log(err));
-    //   // }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider()).then((response) => {
+        console.log(JSON.stringify(response, null));
+        const { userInfo } = response.user;
+        const data = {
+          id: userInfo.uid,
+          email: userInfo.email,
+          fullName: userInfo.displayName,
+          photoURL: userInfo.photoURL,
+          accountType,
+        };
+        const usersRef = collection(db, "users");
+        usersRef
+          .doc(userInfo.uid)
+          .set(data)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      });
+      if (accountType === "admin") {
+        adminRef
+          .doc()
+          .set({
+            id: userInfo.uid,
+            email: userInfo.email,
+            fullName: userInfo.displayName,
+            photoURL: userInfo.photoURL,
+            accountType,
+          })
+          .catch((err) => console.log(err));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   const logOut = () => {
     return signOut(auth)
@@ -122,14 +122,14 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // if (user) {
-      //   const uid = user.uid;
-      //   // const user = auth.currentUser;
-      //   //   const userSnap = db.doc(`users/${user.uid}`).get();
-      //   //   setUserData(userSnap.data());
-      // } else {
-      //   setCurrentUser(null);
-      // }
+      if (user) {
+        const uid = user.uid;
+        const user = auth.currentUser;
+          const userSnap = db.doc(`users/${user.uid}`).get();
+          setUserData(userSnap.data());
+      } else {
+        setCurrentUser(null);
+      }
       setCurrentUser(user);
 
       setLoading(false);

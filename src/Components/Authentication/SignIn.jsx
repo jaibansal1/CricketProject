@@ -19,7 +19,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   
   const login = (email, password) => {
-    // useAuth();
+    useAuth();
   }
 
   return (

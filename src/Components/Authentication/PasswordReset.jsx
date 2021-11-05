@@ -17,20 +17,20 @@ const PasswordReset = () => {
   const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
   const  resetPassword  = useAuth();
 
-  // const sendResetEmail = (event) => {
-  //   event.preventDefault();
-  //   auth
-  //     .sendPasswordResetEmail(email)
-  //     .then(() => {
-  //       setEmailHasBeenSent(true);
-  //       setTimeout(() => {
-  //         setEmailHasBeenSent(false);
-  //       }, 3000);
-  //     })
-  //     .catch(() => {
-  //       setError("Error resetting password");
-  //     });
-  // };
+  const sendResetEmail = (event) => {
+    event.preventDefault();
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        setEmailHasBeenSent(true);
+        setTimeout(() => {
+          setEmailHasBeenSent(false);
+        }, 3000);
+      })
+      .catch(() => {
+        setError("Error resetting password");
+      });
+  };
 
   return (
     <ThemeProvider theme={theme}>
