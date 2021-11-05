@@ -70,6 +70,7 @@ const SignUp = () => {
                       value="admin"
                       control={<Radio />}
                       label="ADMIN"
+                      data-testid="adminChoice"
                     />
                   </Grid>
                   <Grid item>
@@ -77,6 +78,7 @@ const SignUp = () => {
                       value="player"
                       control={<Radio />}
                       label="PLAYER"
+                      data-testid="playerChoice"
                     />
                   </Grid>
                 </Grid>

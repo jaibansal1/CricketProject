@@ -27,7 +27,7 @@ describe ('SignUp General Tests', ()=>{
         expect(lastName.value).toBe("");
         expect(email.value).toBe("");
         expect(password.value).toBe("");
-        //expect(accountType.value).toBe("");
+        expect(accountType.value).toBeUndefined;
         expect(submit).toHaveStyle({
             marginTop: 3,
             marginBottom: 2,
@@ -119,11 +119,20 @@ describe ('SignUp Submit Tests', ()=>{
     });
 })
 
-
 test('Copyright link goes to website', () => {
     render(<SignUp></SignUp>);
     expect(screen.getByText('VCC')).toHaveAttribute('href', 'https://anchorlink.vanderbilt.edu/organization/cricketclub');
 
+})
+
+describe ('SignUp Radio Button Admin/Player Tests', () => {
+    test ("click button and change state", ()=>{ 
+        render(<SignUp></SignUp>);
+        const buttonEl = screen.getByTestId("adminChoice");
+        expect(buttonEl).not.toBeChecked;
+        userEvent.click(buttonEl);
+        expect(buttonEl).toBeChecked;
+    })
 })
 
 
