@@ -11,14 +11,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../Providers/AuthProvider";
 import Copyright from "../GlobalComponents/Copyright";
 import TextField from "@mui/material/TextField";
-import Input from '@mui/material/Input';
 
 const theme = createTheme();
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login  = useAuth();
+  
+  const login = (email, password) => {
+    // useAuth();
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -48,12 +50,12 @@ const SignIn = () => {
             sx={{ mt: 1 }}
             onSubmit={() => login(email, password)}
           >
-            <Input
+            <TextField
               inputProps={{
                 'data-testid': 'email-input'
               }}
               placeholder="Enter email"
-              type="email"
+              margin="normal"
               required
               fullWidth
               id="email"
@@ -65,6 +67,7 @@ const SignIn = () => {
               //data-testid="emailcheck"
             />
             {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
+            
             <TextField
               inputProps={{
                 "data-testid": "password-field"
@@ -76,9 +79,9 @@ const SignIn = () => {
               label="Password"
               type="password"
               id="password"
+              placeholder="Enter password"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
-              inputProps={{ "data-testid": "password-field" }}
             />
             <Button
             
@@ -95,12 +98,12 @@ const SignIn = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/passwordReset" variant="body2">
+                <Link data-testid="forgot-password" href="/passwordReset" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signUp" variant="body2">
+                <Link data-testid="sign-up" href="/signUp" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
