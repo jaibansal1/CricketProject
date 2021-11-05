@@ -11,14 +11,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useAuth } from "../../Providers/AuthProvider";
 import Copyright from "../GlobalComponents/Copyright";
 import TextField from "@mui/material/TextField";
-import Input from '@mui/material/Input';
 
 const theme = createTheme();
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const login  = useAuth();
+  
+  const login = (email, password) => {
+    // useAuth();
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,6 +79,7 @@ const SignIn = () => {
               label="Password"
               type="password"
               id="password"
+              placeholder="Enter password"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
             />
@@ -95,12 +98,12 @@ const SignIn = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/passwordReset" variant="body2">
+                <Link data-testid="forgot-password" href="/passwordReset" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signUp" variant="body2">
+                <Link data-testid="sign-up" href="/signUp" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

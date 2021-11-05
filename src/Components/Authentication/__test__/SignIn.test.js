@@ -5,12 +5,16 @@ import userEvent from '@testing-library/user-event'
 import {render, screen, cleanup} from '@testing-library/react'
 import "@testing-library/jest-dom/extend-expect"
 
+// global.window = { location: { pathname: null } };
+
 describe ('SignIn General Tests', ()=>{
     
     // Test page renders without crashing
     test ("renders without crashing", ()=>{
         const div = document.createElement("div");
         ReactDOM.render(<SignIn></SignIn>, div);
+        
+        // expect(global.window.location.pathname).toEqual('/signIn');
     })
 
     // Test page renders default SignIn state
@@ -33,6 +37,8 @@ describe ('SignIn General Tests', ()=>{
         render(<SignIn></SignIn>);
         expect(screen.getByTestId('login header')).toHaveTextContent('Log In to VCC');
     })
+
+
 })
 
 describe ('SignIn Email Tests', ()=>{
@@ -132,8 +138,74 @@ describe ('SignIn Submit Tests', ()=>{
         const submit = getByTestId("signin-submit");
         expect(submit).not.toHaveClass("Mui-disabled");
     });
+
+    // Test submit button type
+    test('SignIn submit type', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByTestId('signin-submit')).toHaveAttribute("type", "submit");
+    })
+
+    // Test submit button update variable values
+    test('SignIn submit type', () => {
+        render(<SignIn></SignIn>);
+        const buttonEl = screen.getByTestId("signin-submit");
+        userEvent.click(buttonEl);
+        // expect(screen.getByTestId('signin-submit')).toHaveAttribute("type", "submit");
+    })
+
 })
 
+describe ('SignIn Forgot Password Tests', ()=>{
+    
+    // Test forgot password link exists
+    test('SignIn forgot password exists', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByTestId('forgot-password')).toBeInTheDocument();
+    })
+
+    // Test forgot password directs to forgot password page
+    test('SignIn forgot password directs to forgot password page', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByTestId('forgot-password')).toHaveAttribute('href',"/passwordReset");
+
+        const linkEl = screen.getByTestId("forgot-password");
+        userEvent.click(linkEl);
+        // expect(global.window.location.pathname).toEqual('/passwordReset');
+    })
+
+})
+
+describe ('SignIn Sign Up Tests', ()=>{
+    // Test  Sign Up link exists
+    test('SignIn Sign Up exists', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByTestId('sign-up')).toBeInTheDocument();
+    })
+
+    // Test sign up directs to sign up page
+    test('SignIn  Sign Up directs to  Sign Up page', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByTestId('sign-up')).toHaveAttribute('href',"/signUp");
+
+        const linkEl = screen.getByTestId("sign-up");
+        userEvent.click(linkEl);
+    })    
+})
+
+describe ('Signin VCC Tests', ()=>{
+
+    // Test VCC Link exists
+    test('SignIn VCC Link exists', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByText('VCC')).toBeInTheDocument();
+    })
+
+    // Test VCC Link directs properly
+    test('SignIn VCC link directs', () => {
+        render(<SignIn></SignIn>);
+        expect(screen.getByText('VCC')).toHaveAttribute('href', "https://anchorlink.vanderbilt.edu/organization/cricketclub")
+    })
+})
 
 
 
