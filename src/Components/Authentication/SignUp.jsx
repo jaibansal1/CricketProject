@@ -26,7 +26,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("");
 
-  const register = (firsName, lastName,e mail, passowrd, accountType) => {
+  const register = (firsName, lastName, email, passowrd, accountType) => {
     useAuth();
   }
 

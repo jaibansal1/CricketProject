@@ -18,9 +18,9 @@ import {
 } from "firebase/firestore";
 import { app, db } from "../Services/firebase";
 import { auth, generateUserDocument } from "../firebase";
-import { onAuthStateChanged } from "@firebase/auth";
+// import { onAuthStateChanged } from "@firebase/auth";
 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
 // Context is primarily used when some data needs to be accessible by many components at different nesting levels
 // So we build one for authentication to pass auth state to many components down the tree
@@ -61,40 +61,40 @@ const AuthProvider = ({ children }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    try {
-      await signInWithPopup(auth, new GoogleAuthProvider()).then((response) => {
-        console.log(JSON.stringify(response, null));
-        const { userInfo } = response.user;
-        const data = {
-          id: userInfo.uid,
-          email: userInfo.email,
-          fullName: userInfo.displayName,
-          photoURL: userInfo.photoURL,
-          accountType,
-        };
-        const usersRef = collection(db, "users");
-        usersRef
-          .doc(userInfo.uid)
-          .set(data)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
-      });
-      if (accountType === "admin") {
-        adminRef
-          .doc()
-          .set({
-            id: userInfo.uid,
-            email: userInfo.email,
-            fullName: userInfo.displayName,
-            photoURL: userInfo.photoURL,
-            accountType,
-          })
-          .catch((err) => console.log(err));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     await signInWithPopup(auth, new GoogleAuthProvider()).then((response) => {
+  //       console.log(JSON.stringify(response, null));
+  //       const { userInfo } = response.user;
+  //       const data = {
+  //         id: userInfo.uid,
+  //         email: userInfo.email,
+  //         fullName: userInfo.displayName,
+  //         photoURL: userInfo.photoURL,
+  //         accountType,
+  //       };
+  //       const usersRef = collection(db, "users");
+  //       usersRef
+  //         .doc(userInfo.uid)
+  //         .set(data)
+  //         .then((res) => console.log(res))
+  //         .catch((err) => console.log(err));
+  //     });
+  //     if (accountType === "admin") {
+  //       adminRef
+  //         .doc()
+  //         .set({
+  //           id: userInfo.uid,
+  //           email: userInfo.email,
+  //           fullName: userInfo.displayName,
+  //           photoURL: userInfo.photoURL,
+  //           accountType,
+  //         })
+  //         .catch((err) => console.log(err));
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const logOut = () => {
     return signOut(auth)
       .then((res) => {
@@ -145,4 +145,4 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-export { AuthProvider, useAuth, auth };
+export { AuthProvider, useAuth, auth }};

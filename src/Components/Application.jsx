@@ -20,7 +20,7 @@ import { app, db } from "../Services/firebase";
 function Application() {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const user = true;
+  // const user = true;
   const history = createHashHistory();
 
   // NOT SURE IF THIS IS REQUIRED
