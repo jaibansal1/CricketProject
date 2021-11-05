@@ -15,7 +15,7 @@ const theme = createTheme();
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
   const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
-  const { resetPassword } = useAuth();
+  const  resetPassword  = useAuth();
 
   // const sendResetEmail = (event) => {
   //   event.preventDefault();
@@ -45,10 +45,10 @@ const PasswordReset = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-          <Typography variant="h4" component="div" gutterBottom>
+          <Typography variant="h4" component="div" gutterBottom data-testid="reset-header">
             Forgot Password?
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography variant="subtitle1" gutterBottom component="div" data-testid="reset-subheader">
             Enter your email below
           </Typography>
           <Box
@@ -58,7 +58,12 @@ const PasswordReset = () => {
             sx={{ mt: 1 }}
           >
             <TextField
-              margin="normal"
+            inputProps={{
+              "data-testid": "email-input"
+            }}
+            placeholder="Enter email"
+            type="email"
+            margin="normal"
               required
               fullWidth
               id="email"
@@ -66,7 +71,9 @@ const PasswordReset = () => {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(event) => setEmail(event.target.value)}
             />
+            {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
 
             <Button
               type="submit"
@@ -74,6 +81,7 @@ const PasswordReset = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={() => resetPassword(email)}
+              data-testid="reset-submit"
             >
               Reset Password
             </Button>
