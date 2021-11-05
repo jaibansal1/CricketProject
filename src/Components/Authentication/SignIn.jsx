@@ -48,12 +48,12 @@ const SignIn = () => {
             sx={{ mt: 1 }}
             onSubmit={() => login(email, password)}
           >
-            <Input
+            <TextField
               inputProps={{
                 'data-testid': 'email-input'
               }}
               placeholder="Enter email"
-              type="email"
+              margin="normal"
               required
               fullWidth
               id="email"
@@ -65,6 +65,7 @@ const SignIn = () => {
               //data-testid="emailcheck"
             />
             {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
+            
             <TextField
               inputProps={{
                 "data-testid": "password-field"
@@ -78,7 +79,6 @@ const SignIn = () => {
               id="password"
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
-              inputProps={{ "data-testid": "password-field" }}
             />
             <Button
             

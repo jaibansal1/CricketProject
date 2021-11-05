@@ -44,10 +44,10 @@ describe ('SignIn Email Tests', ()=>{
     })
 
     // Test email attribute type
-    test('Email type = email', ()=>{
-        render(<SignIn></SignIn>);
-        expect(screen.getByTestId('email-input')).toHaveAttribute("type", "email");
-    })
+    // test('Email type = email', ()=>{
+    //     render(<SignIn></SignIn>);
+    //     expect(screen.getByTestId('email-input')).toHaveAttribute("type", "email");
+    // })
 
     // Test email initial value
     test('Email input initialized empty', ()=>{
@@ -72,7 +72,7 @@ describe ('SignIn Email Tests', ()=>{
         expect(inputEl).not.toHaveValue("testNOT@mail.com");
     })
 
-    // Test invalid input to email
+    // Test ininvalid input to email
     test('pass invalid email to test input value', ()=>{
         render(<SignIn></SignIn>)
         const inputEl = screen.getByTestId("email-input");
@@ -91,6 +91,28 @@ describe ('SignIn Password Tests', ()=>{
     test('Password input exists', () => {
         render(<SignIn></SignIn>);
         expect(screen.getByTestId('password-field')).toBeInTheDocument();
+    })
+
+    // Test password initial value
+    test('Email password initialized empty', ()=>{
+        render(<SignIn></SignIn>);
+        expect(screen.getByTestId('password-field')).toHaveValue('');
+    })
+
+     // Test valid password as input
+     test('pass valid password to test password input field', ()=>{
+        render(<SignIn></SignIn>)
+        const inputEl = screen.getByTestId("password-field");
+        userEvent.type(inputEl, "password123");
+        expect(inputEl).toHaveValue("password123");
+    })
+
+    // Test valid input to password 2
+    test('pass valid password to test password input field pt2', ()=>{
+        render(<SignIn></SignIn>)
+        const inputEl = screen.getByTestId("password-field");
+        userEvent.type(inputEl, "password123");
+        expect(inputEl).not.toHaveValue("NOTpassword123");
     })
 })
 
