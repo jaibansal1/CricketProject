@@ -16,39 +16,57 @@ import EventCalendar from "./EventCalendar/EventCalendar";
 import { useAuth, auth } from "../Providers/AuthProvider";
 import { createBrowserHistory, createHashHistory } from "history";
 import { app, db } from "../Services/firebase";
+import {
+  User,
+  getAuth,
+  signOut,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  getDoc,
+  getDocs,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 
 function Application() {
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const [user, setUser] = useState(null);
+  // const { currentUser } = useAuth();
   // const user = true;
   // const history = createHashHistory();
 
   // NOT SURE IF THIS IS REQUIRED
-  // useEffect(() => {
-  //   const usersRef = db.collection("users");
-  //   const unsubscribe = onAuthStateChanged(auth, (newUser) => {
-  //     if (newUser) {
-  //       usersRef
-  //         .doc(newUser.uid)
-  //         .get()
-  //         .then((document) => {
-  //           const userData = document.data();
-  //           setLoading(false);
-  //           setUser(userData);
-  //         })
-  //         .catch((error) => {
-  //           setLoading(false);
-  //         });
-  //     } else {
-  //       setUser(null);
-  //       setLoading(false);
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    const usersRef = collection(db, "players");
+    onAuthStateChanged(auth, (newUser) => {
+      // if (newUser) {
+      //   usersRef
+      //     .doc(newUser.uid)
+      //     .get()
+      //     .then((document) => {
+      //       const userData = document.data();
+      //       setLoading(false);
+      //       setUser(userData);
+      //     })
+      //     .catch((error) => {
+      //       setLoading(false);
+      //     });
+      // } else {
+      //   setUser(null);
+      //   setLoading(false);
+      // }
+    });
+  }, []);
 
-  // if (loading) {
-  //   return <></>;
-  // }
+  if (loading) {
+    return <></>;
+  }
   return user ? (
     <Router>
       <Switch>

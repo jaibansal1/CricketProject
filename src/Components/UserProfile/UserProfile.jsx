@@ -24,7 +24,7 @@ import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
 import SearchIcon from "@mui/icons-material/Search";
 import Copyright from "../GlobalComponents/Copyright";
-import { useAuth } from "../../Providers/AuthProvider";
+import { useAuth, auth } from "../../Providers/AuthProvider";
 import Button from "@mui/material/Button";
 import {
   AppBar,
@@ -33,6 +33,15 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../StyledComponents/StyledComponents";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
+
 const mdTheme = createTheme();
 
 const DashboardContent = () => {
@@ -41,7 +50,21 @@ const DashboardContent = () => {
     setOpen(!open);
   };
   const { logout } = useAuth();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    signOut();
 
+    // if (estaRegistrandose) {
+    //   //si se registra
+    //   const usuario = await createUserWithEmailAndPassword(
+    //     auth,
+    //     correo,
+    //     contra
+    //   );
+    // } else {
+    // si está iniciando sesión
+    // }
+  };
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -73,7 +96,7 @@ const DashboardContent = () => {
             >
               VCC Player
             </Typography>
-            <Button variant="contained" onClick={logout}>
+            <Button variant="contained" onClick={() => signOut(auth)}>
               Log Out
             </Button>
 

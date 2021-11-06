@@ -28,10 +28,26 @@ const AuthContext = createContext();
 const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   // const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      // if (user) {
+      //   const uid = user.uid;
+      //   // const user = auth.currentUser;
+      //   //   const userSnap = db.doc(`users/${user.uid}`).get();
+      //   //   setUserData(userSnap.data());
+      // } else {
+      //   setCurrentUser(null);
+      // }
+      console.log(user);
+      setCurrentUser(user);
 
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, []);
   const adminRef = collection(db, "admin");
 
   const register = (firstName, lastName, email, password, accountType) => {
@@ -40,6 +56,7 @@ const AuthProvider = ({ children }) => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        setCurrentUser(user);
         // ...
       })
       .catch((error) => {
@@ -54,6 +71,7 @@ const AuthProvider = ({ children }) => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        setCurrentUser(user);
 
         // ...
       })
@@ -96,15 +114,7 @@ const AuthProvider = ({ children }) => {
     // }
   };
   const logOut = () => {
-    return signOut(auth)
-      .then((res) => {
-        // Sign-out successful.
-        console.log(res);
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+    return signOut(auth);
   };
 
   const resetPassword = (email) => {
@@ -120,26 +130,16 @@ const AuthProvider = ({ children }) => {
       });
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // if (user) {
-      //   const uid = user.uid;
-      //   // const user = auth.currentUser;
-      //   //   const userSnap = db.doc(`users/${user.uid}`).get();
-      //   //   setUserData(userSnap.data());
-      // } else {
-      //   setCurrentUser(null);
-      // }
-      setCurrentUser(user);
+  const value = {
+    currentUser,
+    logIn,
+    register,
+    logOut,
+    resetPassword,
+  };
 
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, []);
   return (
-    <AuthContext.Provider
-      value={{ currentUser, logIn, register, logOut, resetPassword }}
-    >
+    <AuthContext.Provider value={value}>
       {!loading && children}
     </AuthContext.Provider>
   );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
+// import { doc, setDoc } from "firebase/firestore";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -49,9 +49,9 @@ const SignUp = () => {
             component="form"
             noValidate
             sx={{ mt: 1 }}
-            onSubmit={() =>
-              register(firstName, lastName, email, password, accountType)
-            }
+            // onSubmit={() =>
+            //   register(firstName, lastName, email, password, accountType)
+            // }
           >
             <FormControl component="fieldset">
               <FormLabel component="legend">ACCOUNT TYPE</FormLabel>
