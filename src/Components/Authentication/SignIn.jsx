@@ -18,7 +18,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { logIn } = useAuth();
+  const logIn = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
