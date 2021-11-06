@@ -146,7 +146,7 @@ describe ('SignIn Submit Tests', ()=>{
     })
 
     // Test submit button update variable values
-    test('SignIn submit type', () => {
+    test('SignIn submit button', () => {
         render(<SignIn></SignIn>);
         const buttonEl = screen.getByTestId("signin-submit");
         userEvent.click(buttonEl);

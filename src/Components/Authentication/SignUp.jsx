@@ -26,7 +26,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState("");
 
-  const { register } = useAuth();
+  const register  = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
