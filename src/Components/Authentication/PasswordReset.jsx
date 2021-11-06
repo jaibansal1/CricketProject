@@ -16,7 +16,7 @@ const PasswordReset = () => {
   const [email, setEmail] = useState("");
 
   const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
-  const { resetPassword, auth } = useAuth();
+  const { resetPassword } = useAuth();
 
   // const sendResetEmail = (event) => {
   //   event.preventDefault();
