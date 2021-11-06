@@ -1,26 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
-  User,
   getAuth,
   signOut,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  getDoc,
-  getDocs,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { app, db } from "../Services/firebase";
-import { auth, generateUserDocument } from "../firebase";
-// import { onAuthStateChanged } from "@firebase/auth";
 
-// const auth = getAuth(app);
+const auth = getAuth(app);
 
 // Context is primarily used when some data needs to be accessible by many components at different nesting levels
 // So we build one for authentication to pass auth state to many components down the tree
@@ -29,10 +21,15 @@ const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
-  const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
 
-  const adminRef = collection(db, "admin");
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, []);
 
   const register = (firstName, lastName, email, password, accountType) => {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -42,11 +39,7 @@ const AuthProvider = ({ children }) => {
         console.log(user);
         // ...
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+      .catch((error) => console.log(error));
   };
   const logIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
@@ -57,44 +50,9 @@ const AuthProvider = ({ children }) => {
 
         // ...
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-  //   try {
-  //     await signInWithPopup(auth, new GoogleAuthProvider()).then((response) => {
-  //       console.log(JSON.stringify(response, null));
-  //       const { userInfo } = response.user;
-  //       const data = {
-  //         id: userInfo.uid,
-  //         email: userInfo.email,
-  //         fullName: userInfo.displayName,
-  //         photoURL: userInfo.photoURL,
-  //         accountType,
-  //       };
-  //       const usersRef = collection(db, "users");
-  //       usersRef
-  //         .doc(userInfo.uid)
-  //         .set(data)
-  //         .then((res) => console.log(res))
-  //         .catch((err) => console.log(err));
-  //     });
-  //     if (accountType === "admin") {
-  //       adminRef
-  //         .doc()
-  //         .set({
-  //           id: userInfo.uid,
-  //           email: userInfo.email,
-  //           fullName: userInfo.displayName,
-  //           photoURL: userInfo.photoURL,
-  //           accountType,
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      .catch((error) => console.log(error));
+  };
+
   const logOut = () => {
     return signOut(auth)
       .then((res) => {
@@ -113,36 +71,45 @@ const AuthProvider = ({ children }) => {
         // Password reset email sent!
         console.log(res);
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+      .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        const user = auth.currentUser;
-          const userSnap = db.doc(`users/${user.uid}`).get();
-          setUserData(userSnap.data());
-      } else {
-        setCurrentUser(null);
-      }
-      setCurrentUser(user);
+  const googleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider()).then((response) => {
+        console.log(JSON.stringify(response, null));
+        const { userInfo } = response.user;
+        const data = {
+          id: userInfo.uid,
+          email: userInfo.email,
+          fullName: userInfo.displayName,
+          photoURL: userInfo.photoURL,
+        };
+        const usersRef = collection(db, "users");
+        usersRef
+          .doc(userInfo.uid)
+          .set(data)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, []);
   return (
     <AuthContext.Provider
-      value={{ currentUser, logIn, register, logOut, resetPassword }}
+      value={{
+        currentUser,
+        logIn,
+        register,
+        logOut,
+        resetPassword,
+        googleSignIn,
+      }}
     >
       {!loading && children}
     </AuthContext.Provider>
   );
 };
-
-export { AuthProvider, useAuth, auth }};
+export { AuthProvider, useAuth, auth };

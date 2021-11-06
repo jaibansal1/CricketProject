@@ -16,10 +16,12 @@ import EventCalendar from "./EventCalendar/EventCalendar";
 import { useAuth, auth } from "../Providers/AuthProvider";
 import { createBrowserHistory, createHashHistory } from "history";
 import { app, db } from "../Services/firebase";
-
+import { onAuthStateChanged } from "firebase/auth";
 function Application() {
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const [user, setUser] = useState();
+
+  const { currentUser } = useAuth();
   // const user = true;
   const history = createHashHistory();
 
@@ -49,7 +51,7 @@ function Application() {
   if (loading) {
     return <></>;
   }
-  return user ? (
+  return currentUser ? (
     <Router>
       <Switch>
         <Route exact path="/">

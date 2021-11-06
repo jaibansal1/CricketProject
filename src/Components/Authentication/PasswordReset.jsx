@@ -14,23 +14,22 @@ const theme = createTheme();
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
-  const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
-  const  resetPassword  = useAuth();
 
-  const sendResetEmail = (event) => {
-    event.preventDefault();
-    auth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        setEmailHasBeenSent(true);
-        setTimeout(() => {
-          setEmailHasBeenSent(false);
-        }, 3000);
-      })
-      .catch(() => {
-        setError("Error resetting password");
-      });
-  };
+  const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
+  const { resetPassword, auth } = useAuth();
+
+  // const sendResetEmail = (event) => {
+  //   event.preventDefault();
+  //   auth
+  //     .sendPasswordResetEmail(email)
+  //     .then(() => {
+  //       setEmailHasBeenSent(true);
+  //       setTimeout(() => {
+  //         setEmailHasBeenSent(false);
+  //       }, 3000);
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -45,10 +44,20 @@ const PasswordReset = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-          <Typography variant="h4" component="div" gutterBottom data-testid="reset-header">
+          <Typography
+            variant="h4"
+            component="div"
+            gutterBottom
+            data-testid="reset-header"
+          >
             Forgot Password?
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div" data-testid="reset-subheader">
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            data-testid="reset-subheader"
+          >
             Enter your email below
           </Typography>
           <Box
@@ -58,12 +67,12 @@ const PasswordReset = () => {
             sx={{ mt: 1 }}
           >
             <TextField
-            inputProps={{
-              "data-testid": "email-input"
-            }}
-            placeholder="Enter email"
-            type="email"
-            margin="normal"
+              inputProps={{
+                "data-testid": "email-input",
+              }}
+              placeholder="Enter email"
+              type="email"
+              margin="normal"
               required
               fullWidth
               id="email"
@@ -73,7 +82,11 @@ const PasswordReset = () => {
               autoFocus
               onChange={(event) => setEmail(event.target.value)}
             />
-            {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
+            {email && !/\S+@\S+\.\S+/.test(email) && (
+              <span className="error" data-testid="error-msg">
+                Please enter a valid email.
+              </span>
+            )}
 
             <Button
               type="submit"

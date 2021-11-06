@@ -17,10 +17,8 @@ const theme = createTheme();
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const login = (email, password) => {
-    useAuth();
-  }
+
+  const { logIn } = useAuth();
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,21 +36,31 @@ const SignIn = () => {
             src="../../Assets/cricAvatar.jpg"
             sx={{ m: 1, bgcolor: "secondary.main" }}
           />
-          <Typography variant="h4" component="div" gutterBottom data-testid="login header">
+          <Typography
+            variant="h4"
+            component="div"
+            gutterBottom
+            data-testid="login header"
+          >
             Log In to VCC
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div" data-testid="login subheader">
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            component="div"
+            data-testid="login subheader"
+          >
             Google Sign In
           </Typography>
           <Box
             component="form"
             noValidate
             sx={{ mt: 1 }}
-            onSubmit={() => login(email, password)}
+            onSubmit={() => logIn(email, password)}
           >
             <TextField
               inputProps={{
-                'data-testid': 'email-input'
+                "data-testid": "email-input",
               }}
               placeholder="Enter email"
               margin="normal"
@@ -66,11 +74,15 @@ const SignIn = () => {
               onChange={(event) => setEmail(event.target.value)}
               //data-testid="emailcheck"
             />
-            {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
-            
+            {email && !/\S+@\S+\.\S+/.test(email) && (
+              <span className="error" data-testid="error-msg">
+                Please enter a valid email.
+              </span>
+            )}
+
             <TextField
               inputProps={{
-                "data-testid": "password-field"
+                "data-testid": "password-field",
               }}
               margin="normal"
               required
@@ -84,21 +96,23 @@ const SignIn = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
             <Button
-            
               data-testid="signin-submit"
-            
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => login(email, password)}
+              onClick={() => logIn(email, password)}
               data-testid="signin-submit"
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link data-testid="forgot-password" href="/passwordReset" variant="body2">
+                <Link
+                  data-testid="forgot-password"
+                  href="/passwordReset"
+                  variant="body2"
+                >
                   Forgot password?
                 </Link>
               </Grid>
