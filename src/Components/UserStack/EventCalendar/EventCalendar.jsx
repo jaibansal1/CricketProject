@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -72,8 +73,11 @@ const RosterAdminView = () => {
             >
               Vanderbilt Cricket Club Calendar
             </Typography>
-            <Button variant="contained">Add Event</Button>
-
+            <Link
+            href="https://calendar.google.com/calendar/u/0/r?cid=group10cricket@gmail.com"
+            underline="none">
+              <Button variant="contained">Add Event </Button>
+            </Link>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -120,6 +124,9 @@ const RosterAdminView = () => {
             overflow: "auto",
           }}
         >
+          {/* <style>
+              margin-bottom: 50cm;
+          </style> */}
          <iframe src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago" width="800" height="600" frameborder="0" scrolling="no"></iframe>
           {/* <Cal /> */}
           <Toolbar />
