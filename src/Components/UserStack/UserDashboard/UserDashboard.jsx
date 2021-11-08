@@ -1,7 +1,14 @@
-import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useContext } from "react";
+import {
+  styled,
+  createTheme,
+  ThemeProvider,
+  alpha,
+} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
+import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -10,30 +17,32 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Link from "@mui/material/Link";
+import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../GlobalComponents/listItems";
+import { mainListItems } from "../../GlobalComponents/listItems";
+import AvatarCard from "../../GlobalComponents/AvatarCard";
 
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
-import Cal from "./Cal";
-import Copyright from "../GlobalComponents/Copyright";
+import Copyright from "../../GlobalComponents/Copyright";
 import {
   AppBar,
   Drawer,
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "../StyledComponents/StyledComponents";
+} from "../../StyledComponents/StyledComponents";
 
 const mdTheme = createTheme();
 
-const RosterAdminView = () => {
+const RosterUserView = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -68,10 +77,8 @@ const RosterAdminView = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Vanderbilt Cricket Club Calendar
+              Vanderbilt Club Roster
             </Typography>
-            <Button variant="contained">Add Event</Button>
-
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -118,12 +125,46 @@ const RosterAdminView = () => {
             overflow: "auto",
           }}
         >
-          <Cal />
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Player Cards */}
-              <Grid item xs={12} md={4} lg={3}></Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard />
+                </Paper>
+              </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
@@ -133,8 +174,8 @@ const RosterAdminView = () => {
   );
 };
 
-const AdminDashboard = () => {
-  return <RosterAdminView />;
+const UserDashboard = () => {
+  return <RosterUserView />;
 };
 
-export default AdminDashboard;
+export default UserDashboard;

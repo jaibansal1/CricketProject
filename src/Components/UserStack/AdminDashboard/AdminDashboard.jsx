@@ -11,28 +11,26 @@ import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../GlobalComponents/listItems";
-import AvatarCard from "../GlobalComponents/AvatarCard";
-import Bio from "./Bio";
-import Info from "./Info";
-import Orders from "./Orders";
+import { mainListItems } from "../../GlobalComponents/listItems";
+import AvatarCard from "../../GlobalComponents/AvatarCard";
+
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
-import SearchIcon from "@mui/icons-material/Search";
-import Copyright from "../GlobalComponents/Copyright";
-import { useAuth, auth } from "../../Providers/AuthProvider";
-import Button from "@mui/material/Button";
+import Copyright from "../../GlobalComponents/Copyright";
 import {
   AppBar,
   Drawer,
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "../StyledComponents/StyledComponents";
+} from "../../StyledComponents/StyledComponents";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -41,30 +39,17 @@ import {
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
+import { useAuth, auth } from "../../../Providers/AuthProvider";
 
 const mdTheme = createTheme();
 
-const DashboardContent = () => {
+const RosterAdminView = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const { logout } = useAuth();
-  const submitHandler = (e) => {
-    e.preventDefault();
-    signOut();
+  // const { logOut } = useAuth();
 
-    // if (estaRegistrandose) {
-    //   //si se registra
-    //   const usuario = await createUserWithEmailAndPassword(
-    //     auth,
-    //     correo,
-    //     contra
-    //   );
-    // } else {
-    // si está iniciando sesión
-    // }
-  };
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -94,11 +79,12 @@ const DashboardContent = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              VCC Player
+              Vanderbilt Club Roster
             </Typography>
             <Button variant="contained" onClick={() => signOut(auth)}>
               Log Out
             </Button>
+            <Button variant="contained">Add Player</Button>
 
             <Search>
               <SearchIconWrapper>
@@ -149,6 +135,7 @@ const DashboardContent = () => {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
+              {/* Player Cards */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -170,7 +157,7 @@ const DashboardContent = () => {
                     height: 240,
                   }}
                 >
-                  <Info />
+                  <AvatarCard />
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
@@ -182,13 +169,7 @@ const DashboardContent = () => {
                     height: 240,
                   }}
                 >
-                  <Bio />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Orders />
+                  <AvatarCard />
                 </Paper>
               </Grid>
             </Grid>
@@ -200,30 +181,8 @@ const DashboardContent = () => {
   );
 };
 
-const UserProfile = () => {
-  // const user = useContext(UserContext);
-  //   const user = "akdfsn"
-  // const {photoURL, displayName, email} = user;
-  // console.log(user);
-  return <DashboardContent />;
-  // <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-  //   <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-  //     <div
-  //       style={{
-  //         background: `url(${photoURL || 'https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png'})  no-repeat center center`,
-  //         backgroundSize: "cover",
-  //         height: "200px",
-  //         width: "200px"
-  //       }}
-  //       className="border border-blue-300"
-  //     ></div>
-  //     <div className = "md:pl-4">
-  //     <h2 className = "text-2xl font-semibold">{displayName}</h2>
-  //     <h3 className = "italic">{email}</h3>
-  //     </div>
-  //   </div>
-  //   <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
-  // </div>
+const AdminDashboard = () => {
+  return <RosterAdminView />;
 };
 
-export default UserProfile;
+export default AdminDashboard;

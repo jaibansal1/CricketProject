@@ -10,27 +10,26 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../GlobalComponents/listItems";
-import AvatarCard from "../GlobalComponents/AvatarCard";
+import { mainListItems } from "../../GlobalComponents/listItems";
 
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
-import Copyright from "../GlobalComponents/Copyright";
+import Cal from "./Cal";
+import Copyright from "../../GlobalComponents/Copyright";
 import {
   AppBar,
   Drawer,
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "../StyledComponents/StyledComponents";
+} from "../../StyledComponents/StyledComponents";
 
 const mdTheme = createTheme();
 
@@ -69,9 +68,9 @@ const RosterAdminView = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Vanderbilt Club Roster
+              Vanderbilt Cricket Club Calendar
             </Typography>
-            <Button variant="contained">Add Player</Button>
+            <Button variant="contained">Add Event</Button>
 
             <Search>
               <SearchIconWrapper>
@@ -119,46 +118,12 @@ const RosterAdminView = () => {
             overflow: "auto",
           }}
         >
+          <Cal />
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Player Cards */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <AvatarCard />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <AvatarCard />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <AvatarCard />
-                </Paper>
-              </Grid>
+              <Grid item xs={12} md={4} lg={3}></Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

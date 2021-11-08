@@ -8,7 +8,7 @@ import Link from "@mui/material/Link";
 
 export const mainListItems = (
   <div>
-    <Link href="/AdminDashboard" underline="none">
+    <Link href="/userDashboard" underline="none">
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />
@@ -16,7 +16,7 @@ export const mainListItems = (
         <ListItemText primary="Roster" />
       </ListItem>
     </Link>
-    <Link href="/EventCalendar" underline="none">
+    <Link href="/eventCalendar" underline="none">
       <ListItem button>
         <ListItemIcon>
           <CalendarTodayIcon />
@@ -24,7 +24,7 @@ export const mainListItems = (
         <ListItemText primary="Event Calendar" />
       </ListItem>
     </Link>
-    <Link href="/" underline="none">
+    <Link href="/userProfile" underline="none">
       <ListItem button>
         <ListItemIcon>
           <PeopleIcon />

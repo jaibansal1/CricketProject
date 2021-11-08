@@ -1,14 +1,11 @@
-import React, { useContext } from "react";
-import {
-  styled,
-  createTheme,
-  ThemeProvider,
-  alpha,
-} from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useHistory } from "react-router";
+import { auth, db, logout } from "../../../Services/firebase";
+
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -18,35 +15,82 @@ import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems } from "../GlobalComponents/listItems";
-import AvatarCard from "../GlobalComponents/AvatarCard";
-
+import { mainListItems } from "../../GlobalComponents/listItems";
+import AvatarCard from "../../GlobalComponents/AvatarCard";
+import Bio from "./Bio";
+import Info from "./Info";
+import Orders from "./Orders";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
-import Copyright from "../GlobalComponents/Copyright";
+import SearchIcon from "@mui/icons-material/Search";
+import Copyright from "../../GlobalComponents/Copyright";
+// import { auth } from "../../../Providers/AuthProvider";
+import Button from "@mui/material/Button";
 import {
   AppBar,
   Drawer,
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "../StyledComponents/StyledComponents";
+} from "../../StyledComponents/StyledComponents";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
 
 const mdTheme = createTheme();
 
-const RosterUserView = () => {
+const DashboardContent = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const history = useHistory();
+
+  // const fetchUserName = async () => {
+  //   try {
+  //     const query = await db
+  //       .collection("users")
+  //       .where("uid", "==", user?.uid)
+  //       .get();
+  //     const data = await query.docs[0].data();
+  //     setName(data.name);
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("An error occured while fetching user data");
+  //   }
+  // };
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history.replace("/");
+
+    // fetchUserName();
+  }, [user, loading]);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   signOut();
+
+  //   // if (estaRegistrandose) {
+  //   //   //si se registra
+  //   //   const usuario = await createUserWithEmailAndPassword(
+  //   //     auth,
+  //   //     correo,
+  //   //     contra
+  //   //   );
+  //   // } else {
+  //   // si está iniciando sesión
+  //   // }
+  // };
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -77,8 +121,12 @@ const RosterUserView = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Vanderbilt Club Roster
+              VCC Player
             </Typography>
+            <Button variant="contained" onClick={logout}>
+              Log Out
+            </Button>
+
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -128,7 +176,6 @@ const RosterUserView = () => {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Player Cards */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -150,7 +197,7 @@ const RosterUserView = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard />
+                  <Info />
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
@@ -162,7 +209,13 @@ const RosterUserView = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard />
+                  <Bio />
+                </Paper>
+              </Grid>
+              {/* Recent Orders */}
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Orders />
                 </Paper>
               </Grid>
             </Grid>
@@ -174,8 +227,30 @@ const RosterUserView = () => {
   );
 };
 
-const UserDashboard = () => {
-  return <RosterUserView />;
+const UserProfile = () => {
+  // const user = useContext(UserContext);
+  //   const user = "akdfsn"
+  // const {photoURL, displayName, email} = user;
+  // console.log(user);
+  return <DashboardContent />;
+  // <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
+  //   <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
+  //     <div
+  //       style={{
+  //         background: `url(${photoURL || 'https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png'})  no-repeat center center`,
+  //         backgroundSize: "cover",
+  //         height: "200px",
+  //         width: "200px"
+  //       }}
+  //       className="border border-blue-300"
+  //     ></div>
+  //     <div className = "md:pl-4">
+  //     <h2 className = "text-2xl font-semibold">{displayName}</h2>
+  //     <h3 className = "italic">{email}</h3>
+  //     </div>
+  //   </div>
+  //   <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
+  // </div>
 };
 
-export default UserDashboard;
+export default UserProfile;

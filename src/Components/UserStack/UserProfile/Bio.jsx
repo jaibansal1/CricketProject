@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import Title from "../GlobalComponents/Title";
+import Title from "../../GlobalComponents/Title";
 import Box from "@mui/material/Box";
 import { Text } from "recharts";
 

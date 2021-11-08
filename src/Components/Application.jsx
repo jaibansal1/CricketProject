@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import SignIn from "./Authentication/SignIn";
-import SignUp from "./Authentication/SignUp";
-import PasswordReset from "./Authentication/PasswordReset";
-import UserProfile from "./UserProfile/UserProfile";
-import AdminDashboard from "./AdminDashboard/AdminDashboard";
-import UserDashboard from "./UserDashboard/UserDashboard";
-import EventCalendar from "./EventCalendar/EventCalendar";
+import SignIn from "./AuthStack/SignIn";
+import SignUp from "./AuthStack/SignUp";
+import PasswordReset from "./AuthStack/PasswordReset";
+import UserProfile from "./UserStack/UserProfile/UserProfile";
+import AdminDashboard from "./UserStack/AdminDashboard/AdminDashboard";
+import UserDashboard from "./UserStack/UserDashboard/UserDashboard";
+import EventCalendar from "./UserStack/EventCalendar/EventCalendar";
 import { useAuth, auth } from "../Providers/AuthProvider";
 import { createBrowserHistory, createHashHistory } from "history";
 import { app, db } from "../Services/firebase";
