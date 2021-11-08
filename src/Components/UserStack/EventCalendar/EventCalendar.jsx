@@ -31,6 +31,8 @@ import {
   StyledInputBase,
 } from "../../StyledComponents/StyledComponents";
 
+import ApiCalendar from 'react-google-calendar-api';
+
 const mdTheme = createTheme();
 
 const RosterAdminView = () => {
@@ -118,7 +120,8 @@ const RosterAdminView = () => {
             overflow: "auto",
           }}
         >
-          <Cal />
+         <iframe src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+          {/* <Cal /> */}
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
