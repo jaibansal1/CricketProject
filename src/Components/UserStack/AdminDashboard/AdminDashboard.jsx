@@ -31,15 +31,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../../StyledComponents/StyledComponents";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithRedirect,
-  GoogleAuthProvider,
-  signOut,
-} from "firebase/auth";
-import { useAuth, auth } from "../../../Providers/AuthProvider";
+import { auth, db, logout } from "../../../Services/firebase";
 
 const mdTheme = createTheme();
 
@@ -81,7 +73,7 @@ const RosterAdminView = () => {
             >
               Vanderbilt Club Roster
             </Typography>
-            <Button variant="contained" onClick={() => signOut(auth)}>
+            <Button variant="contained" onClick={logout}>
               Log Out
             </Button>
             <Button variant="contained">Add Player</Button>
