@@ -8,7 +8,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-const AvatarCard = () => {
+const AvatarCard = (props) => {
   return (
     <React.Fragment>
       <Avatar
@@ -23,7 +23,7 @@ const AvatarCard = () => {
         OP
       </Avatar>
       <Box sx={{ mx: "auto", my: 0.6 }}>
-        <Title>Opu Poro</Title>
+        <Title>{props.nameProp}</Title>
       </Box>
       <Box sx={{ mx: "auto", my: 0.6 }}>
         <Title>Batting Allrounder</Title>

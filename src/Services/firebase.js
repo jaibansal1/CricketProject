@@ -76,7 +76,6 @@ export {
   resetPassword,
   logout,
 };
-// export const auth = getAuth();
 
 // const getUserDocument = async (uid) => {
 //   if (!uid) return null;

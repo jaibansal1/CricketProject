@@ -28,7 +28,6 @@ import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
 import SearchIcon from "@mui/icons-material/Search";
 import Copyright from "../../GlobalComponents/Copyright";
-// import { auth } from "../../../Providers/AuthProvider";
 import Button from "@mui/material/Button";
 import {
   AppBar,
@@ -38,13 +37,17 @@ import {
   StyledInputBase,
 } from "../../StyledComponents/StyledComponents";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithRedirect,
-  GoogleAuthProvider,
-  signOut,
-} from "firebase/auth";
+  getFirestore,
+  collection,
+  addDoc,
+  where,
+  getDoc,
+  query,
+  getDocs,
+  doc,
+  setDoc,
+  ref,
+} from "firebase/firestore";
 
 const mdTheme = createTheme();
 
@@ -53,44 +56,46 @@ const DashboardContent = () => {
   const [name, setName] = useState("");
   const history = useHistory();
 
-  // const fetchUserName = async () => {
-  //   try {
-  //     const query = await db
-  //       .collection("users")
-  //       .where("uid", "==", user?.uid)
-  //       .get();
-  //     const data = await query.docs[0].data();
-  //     setName(data.name);
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("An error occured while fetching user data");
-  //   }
-  // };
+  const playerRef = collection(db, "player");
+  const fetchUserData = async () => {
+    try {
+      // const query = getDoc(playerRef.);
+      // const q = query(playerRef, where("uid", "==", user?.uid));
+      // console.log(q);
+      const querySnapshot = await getDocs(playerRef);
+      // querySnapshot.forEach((doc) => {
+      //   // doc.data() is never undefined for query doc snapshots
+      //   console.log(doc.id, " => ", doc.data());
+      // });
+      console.log(querySnapshot);
+      // const q = query(querySnapshot, where("uid", "==", user?.uid));
+      // console.log(querySnapshot.data().name);
+      // const docRef = doc(db, "player", auth.currentUser.uid);
+      // const docSnap = await getDoc(docRef);
+      // if (docSnap.exists()) {
+      //   const data = await docSnap.data();
+      //   setName(data.name);
+
+      //   console.log("Document data:", data);
+      // } else {
+      //   console.log("No such document!");
+      // }
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
   useEffect(() => {
     if (loading) return;
     if (!user) return history.replace("/");
 
-    // fetchUserName();
+    fetchUserData();
   }, [user, loading]);
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   signOut();
-
-  //   // if (estaRegistrandose) {
-  //   //   //si se registra
-  //   //   const usuario = await createUserWithEmailAndPassword(
-  //   //     auth,
-  //   //     correo,
-  //   //     contra
-  //   //   );
-  //   // } else {
-  //   // si está iniciando sesión
-  //   // }
-  // };
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -141,7 +146,7 @@ const DashboardContent = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Text>Opu Poro</Text>
+            <Text>{name}</Text>
             <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
           </Toolbar>
         </AppBar>
@@ -185,7 +190,7 @@ const DashboardContent = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard />
+                  <AvatarCard nameProp={name} />
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
