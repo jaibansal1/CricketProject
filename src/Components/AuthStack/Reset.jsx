@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Copyright from "../GlobalComponents/Copyright";
 
+import SignIn from "./SignIn";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import { useAuth } from "../../Providers/AuthProvider";
 
@@ -59,6 +61,7 @@ const Reset = () => {
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
           />
+          {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
           <Button
             type="submit"
             fullWidth
@@ -70,6 +73,9 @@ const Reset = () => {
           </Button>
           <div>
             Don't have an account? <Link to="/register">Register</Link> now.
+          </div>
+          <div>
+             <Link to="/">Sign In</Link> now.
           </div>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Box>
