@@ -18,7 +18,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../GlobalComponents/Copyright";
 import TextField from "@mui/material/TextField";
+import { Link } from "react-router-dom";
 
+import SignIn from "./SignIn";
 const theme = createTheme();
 
 const Register = () => {
@@ -102,6 +104,7 @@ const Register = () => {
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
           />
+          {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
           <TextField
             margin="normal"
             required
@@ -122,6 +125,9 @@ const Register = () => {
           >
             Register
           </Button>
+          <div>
+             <Link to="/">Sign In</Link> with existing account.
+          </div>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>

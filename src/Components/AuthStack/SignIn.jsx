@@ -63,6 +63,7 @@ const SignIn = () => {
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
           />
+          {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
           <TextField
             margin="normal"
             required
