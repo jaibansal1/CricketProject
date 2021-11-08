@@ -21,6 +21,8 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { auth, db, logout } from "../../../Services/firebase";
+import Button from "@mui/material/Button";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -79,6 +81,9 @@ const RosterUserView = () => {
             >
               Vanderbilt Club Roster
             </Typography>
+            <Button variant="contained" onClick={logout}>
+              Log Out
+            </Button>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

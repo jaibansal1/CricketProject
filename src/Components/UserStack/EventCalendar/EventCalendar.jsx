@@ -1,4 +1,3 @@
-import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -12,6 +11,10 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+import { auth, db, logout } from "../../../Services/firebase";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useHistory } from "react-router";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -34,10 +37,20 @@ import {
 const mdTheme = createTheme();
 
 const RosterAdminView = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history.replace("/");
+
+  //  fetchUserData();
+  }, [user, loading]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -70,6 +83,9 @@ const RosterAdminView = () => {
             >
               Vanderbilt Cricket Club Calendar
             </Typography>
+            <Button variant="contained" onClick={logout}>
+              Log Out
+            </Button>
             <Button variant="contained">Add Event</Button>
 
             <Search>
