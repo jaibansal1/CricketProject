@@ -127,7 +127,9 @@ const RosterAdminView = () => {
           {/* <style>
               margin-bottom: 50cm;
           </style> */}
-         <iframe src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+          <Box sx = {{mt: 10, ml:13}}>
+         <iframe src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago" width="1000" height="600" frameborder="0" scrolling="no" ></iframe>
+          </Box>
           {/* <Cal /> */}
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
