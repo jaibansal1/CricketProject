@@ -40,7 +40,6 @@ const RosterAdminView = () => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  // const { logOut } = useAuth();
 
   return (
     <ThemeProvider theme={mdTheme}>

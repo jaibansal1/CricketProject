@@ -19,7 +19,6 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 
-
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -38,7 +37,7 @@ import {
   StyledInputBase,
 } from "../../StyledComponents/StyledComponents";
 
-import ApiCalendar from 'react-google-calendar-api';
+import ApiCalendar from "react-google-calendar-api";
 
 const mdTheme = createTheme();
 
@@ -55,7 +54,7 @@ const RosterAdminView = () => {
     if (loading) return;
     if (!user) return history.replace("/");
 
-  //  fetchUserData();
+    //  fetchUserData();
   }, [user, loading]);
 
   return (
@@ -91,15 +90,16 @@ const RosterAdminView = () => {
             </Typography>
 
             <Link
-            href="https://calendar.google.com/calendar/u/0/r?cid=group10cricket@gmail.com"
-            underline="none">
+              href="https://calendar.google.com/calendar/u/0/r?cid=group10cricket@gmail.com"
+              underline="none"
+            >
               <Button variant="contained">Add Event </Button>
             </Link>
 
             <Button variant="contained" onClick={logout}>
               Log Out
             </Button>
-    
+
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -149,8 +149,14 @@ const RosterAdminView = () => {
           {/* <style>
               margin-bottom: 50cm;
           </style> */}
-          <Box sx = {{mt: 10, ml:13}}>
-         <iframe src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago" width="1000" height="600" frameborder="0" scrolling="no" ></iframe>
+          <Box sx={{ mt: 10, ml: 13 }}>
+            <iframe
+              src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago"
+              width="1000"
+              height="600"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
           </Box>
           {/* <Cal /> */}
           <Toolbar />

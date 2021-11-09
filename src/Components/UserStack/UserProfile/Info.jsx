@@ -5,11 +5,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-const Info = () => {
+const Info = (props) => {
   return (
     <React.Fragment>
       <Box sx={{ mx: "auto", my: 1 }}>
@@ -19,16 +15,13 @@ const Info = () => {
         <nav aria-label="main mailbox folders">
           <List>
             <ListItem disablePadding>
-              <ListItemText primary="Sophomore" />
+              <ListItemText primary={props.yearProp} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Batting Allrounder" />
+              <ListItemText primary={props.batProp} />
             </ListItem>
             <ListItem disablePadding>
-              <ListItemText primary="Right Hand Bat" />
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemText primary="Right Arm Medium Fast" />
+              <ListItemText primary={props.bowlProp} />
             </ListItem>
           </List>
         </nav>

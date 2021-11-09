@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 import {
   getFirestore,
   collection,
@@ -7,6 +8,8 @@ import {
   getDocs,
   doc,
   setDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -14,6 +17,8 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  onAuthStateChanged,
+  getAdditionalUserInfo,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -67,6 +72,7 @@ const resetPassword = async (email) => {
 const logout = () => {
   signOut(auth);
 };
+
 export {
   auth,
   db,

@@ -6,6 +6,11 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Title from "../../GlobalComponents/Title";
+import { LensTwoTone } from "@mui/icons-material";
+
+let totalRuns = 0;
+let totalBalls = 0;
+const totalMatches = 0;
 
 // Generate Order Data
 function createData(id, type, innings, runs, avg, sr, hs) {
@@ -21,8 +26,7 @@ const rows = [
 function preventDefault(event) {
   event.preventDefault();
 }
-
-const Orders = () => {
+const Stats = (props) => {
   return (
     <React.Fragment>
       <Title>Player Stats</Title>
@@ -56,4 +60,4 @@ const Orders = () => {
     </React.Fragment>
   );
 };
-export default Orders;
+export default Stats;

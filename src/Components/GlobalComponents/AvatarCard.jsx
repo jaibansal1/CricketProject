@@ -4,10 +4,6 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 const AvatarCard = (props) => {
   return (
     <React.Fragment>
@@ -19,14 +15,12 @@ const AvatarCard = (props) => {
           my: 3,
           gcolor: deepPurple[500],
         }}
-      >
-        OP
-      </Avatar>
+      ></Avatar>
       <Box sx={{ mx: "auto", my: 0.6 }}>
         <Title>{props.nameProp}</Title>
       </Box>
       <Box sx={{ mx: "auto", my: 0.6 }}>
-        <Title>Batting Allrounder</Title>
+        <Title>{props.roleProp}</Title>
       </Box>
     </React.Fragment>
   );

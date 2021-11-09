@@ -1,48 +1,59 @@
-import React, { useContext } from "react";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useHistory } from "react-router";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
-import { auth, db, logout } from "../../../Services/firebase";
-import Button from "@mui/material/Button";
 
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "../../GlobalComponents/listItems";
 import AvatarCard from "../../GlobalComponents/AvatarCard";
 
-import Avatar from "@mui/material/Avatar";
-import { deepPurple } from "@mui/material/colors";
-import { Text } from "recharts";
 import Copyright from "../../GlobalComponents/Copyright";
-import {
-  AppBar,
-  Drawer,
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-} from "../../StyledComponents/StyledComponents";
+import { AppBar, Drawer } from "../../StyledComponents/StyledComponents";
+import Header from "../../GlobalComponents/Header";
+import { collection, where, query, getDocs } from "firebase/firestore";
+import { auth, db } from "../../../Services/firebase";
 
 const mdTheme = createTheme();
 
 const RosterUserView = () => {
-  const [open, setOpen] = React.useState(true);
+  const [user, loading, error] = useAuthState(auth);
+  const [userData, setUserData] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return history.replace("/");
+    fetchUserData();
+  }, [user, loading]);
+
+  const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const playerRef = collection(db, "player");
+  const fetchUserData = async () => {
+    try {
+      const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        setUserData(doc.data());
+      });
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
   };
 
   return (
@@ -50,52 +61,12 @@ const RosterUserView = () => {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: "24px", // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Vanderbilt Club Roster
-            </Typography>
-            <Button variant="contained" onClick={logout}>
-              Log Out
-            </Button>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <Text>Opu Poro</Text>
-            <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-          </Toolbar>
+          <Header
+            openProp={open}
+            titleProp={"VCC Roster"}
+            dataProp={userData}
+            toggleProp={toggleDrawer}
+          />
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
