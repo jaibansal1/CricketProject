@@ -11,10 +11,14 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
+
+import Link from "@mui/material/Link";
+
 import { auth, db, logout } from "../../../Services/firebase";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
+
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -33,6 +37,8 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../../StyledComponents/StyledComponents";
+
+import ApiCalendar from 'react-google-calendar-api';
 
 const mdTheme = createTheme();
 
@@ -83,11 +89,17 @@ const RosterAdminView = () => {
             >
               Vanderbilt Cricket Club Calendar
             </Typography>
+
+            <Link
+            href="https://calendar.google.com/calendar/u/0/r?cid=group10cricket@gmail.com"
+            underline="none">
+              <Button variant="contained">Add Event </Button>
+            </Link>
+
             <Button variant="contained" onClick={logout}>
               Log Out
             </Button>
-            <Button variant="contained">Add Event</Button>
-
+    
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -134,7 +146,13 @@ const RosterAdminView = () => {
             overflow: "auto",
           }}
         >
-          <Cal />
+          {/* <style>
+              margin-bottom: 50cm;
+          </style> */}
+          <Box sx = {{mt: 10, ml:13}}>
+         <iframe src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago" width="1000" height="600" frameborder="0" scrolling="no" ></iframe>
+          </Box>
+          {/* <Cal /> */}
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
