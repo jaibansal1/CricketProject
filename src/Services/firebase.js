@@ -83,6 +83,9 @@ const register = async (name, email, password, accountType) => {
     else if (errorCode == 'auth/email-already-in-use') {
       alert('Account already exists with this email.');
     }
+    else if (errorCode == 'auth/missing-email') {
+      alert('Please enter an email address.');
+    }
     else {
       alert(errorMessage);
     }
