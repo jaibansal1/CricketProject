@@ -56,6 +56,22 @@ const register = async (name, email, password, accountType) => {
     console.log("Document written with ID: ", docRef.id);
   } catch (err) {
     console.error("Error adding document: ", err);
+    var errorCode = err.code;
+    var errorMessage = err.message;
+    if (errorCode == 'auth/weak-password') {
+      alert('The password is too weak.');
+    } 
+    else if (errorCode == 'auth/invalid-email') {
+      alert('Please enter a valid email address.');
+    }
+    else if (errorCode == 'auth/email-already-in-use') {
+      alert('Account already exists with this email.');
+    }
+    else {
+      alert(errorMessage);
+    }
+    console.log(err);
+    
   }
 };
 
