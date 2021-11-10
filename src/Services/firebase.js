@@ -39,7 +39,23 @@ const signIn = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    var errorCode = err.code;
+    var errorMessage = err.message;
+
+    if (errorCode == 'auth/user-not-found') {
+      alert('No user exists with this email address. Try creating a new account!');
+    } 
+    else if (errorCode == 'auth/invalid-email') {
+      alert('Please enter a valid email address.');
+    }
+    else if (errorCode == 'auth/wrong-password') {
+      alert('Incorrect Password.');
+    }
+    else {
+      alert(errorMessage);
+    }
+    console.log(err);
+    // alert(err.message);
   }
 };
 
@@ -59,7 +75,7 @@ const register = async (name, email, password, accountType) => {
     var errorCode = err.code;
     var errorMessage = err.message;
     if (errorCode == 'auth/weak-password') {
-      alert('The password is too weak.');
+      alert('The password is too weak. Password must be at least 6 characters!');
     } 
     else if (errorCode == 'auth/invalid-email') {
       alert('Please enter a valid email address.');
@@ -71,7 +87,6 @@ const register = async (name, email, password, accountType) => {
       alert(errorMessage);
     }
     console.log(err);
-    
   }
 };
 
@@ -81,7 +96,17 @@ const resetPassword = async (email) => {
     alert("Password reset link sent!");
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    var errorCode = err.code;
+    var errorMessage = err.message;
+    if (errorCode == 'auth/invalid-email') {
+      alert('Please enter a valid email address.');
+    }
+    else if (errorCode == 'auth/user-not-found') {
+      alert('No user exists with this email address. Try creating a new account!');
+    }
+    else {
+      alert(err.message);
+    }
   }
 };
 
