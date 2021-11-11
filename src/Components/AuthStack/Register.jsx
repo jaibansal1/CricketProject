@@ -29,6 +29,12 @@ const Register = () => {
   const [name, setName] = useState("");
   const [accountType, setAccountType] = useState("");
 
+  const [grade,setGrade] = useState("");
+  const [role,setRole] = useState("");
+  const [bat,setBat] = useState("");
+  const [bowl,setBowl] = useState("");
+  const [bio,setBio] = useState("");
+
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
@@ -116,12 +122,74 @@ const Register = () => {
             autoComplete="current-password"
             onChange={(event) => setPassword(event.target.value)}
           />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="grade"
+            label="Grade"
+            // type="grade"
+            id="grade"
+            autoComplete="grade"
+            onChange={(event) => setGrade(event.target.value)}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="role"
+            label="Role"
+            // type="role"
+            id="role"
+            autoComplete="Role"
+            onChange={(event) => setRole(event.target.value)}
+          />
+
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="bat"
+            label="Bats:"
+            // type="grade"
+            id="bat"
+            autoComplete="Bats"
+            onChange={(event) => setBat(event.target.value)}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="Bowl"
+            label="Bowls:"
+            // type="grade"
+            id="grade"
+            autoComplete="Bowls"
+            onChange={(event) => setBowl(event.target.value)}
+          />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            multiline
+            rows={3}
+            name="bio"
+            label="Short Bio:"
+            // type="grade"
+            id="bio"
+            autoComplete="Tell us a little about you!"
+            onChange={(event) => setBio(event.target.value)}
+          />      
+
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => register(name, email, password, accountType)}
+            onClick={() => register(name, email, password, accountType, grade, role, bat, bowl, bio)}
           >
             Register
           </Button>

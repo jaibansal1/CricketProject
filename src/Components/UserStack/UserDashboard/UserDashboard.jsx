@@ -41,7 +41,7 @@ const RosterUserView = () => {
     setOpen(!open);
   };
 
-  const playerRef = collection(db, "player");
+  const playerRef = collection(db, "admin");
   const fetchUserData = async () => {
     try {
       const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
@@ -109,7 +109,10 @@ const RosterUserView = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard />
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
@@ -121,7 +124,10 @@ const RosterUserView = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard />
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
@@ -133,9 +139,157 @@ const RosterUserView = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard />
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
                 </Paper>
               </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                >
+                  <AvatarCard
+                    nameProp={userData.name}
+                    roleProp={userData.role}
+                  />
+                </Paper>
+              </Grid>
+              
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

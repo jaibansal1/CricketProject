@@ -72,7 +72,7 @@ const signIn = async (email, password) => {
   }
 };
 
-const register = async (name, email, password, accountType) => {
+const register = async (name, email, password, accountType, grade, role, bat, bowl, bio) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -81,6 +81,11 @@ const register = async (name, email, password, accountType) => {
       name,
       email,
       accountType,
+      grade,
+      role,
+      bat,
+      bowl,
+      bio
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (err) {
