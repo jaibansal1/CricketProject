@@ -21,6 +21,9 @@ import Stats from "./Stats";
 import Copyright from "../../GlobalComponents/Copyright";
 import { Drawer, AppBar } from "../../StyledComponents/StyledComponents";
 
+import { Link } from "@mui/material";
+import { Button } from "@mui/material";
+
 import { auth, db } from "../../../Services/firebase";
 import { collection, where, query, getDocs } from "firebase/firestore";
 import Header from "../../GlobalComponents/Header";
@@ -42,7 +45,7 @@ const DashboardContent = () => {
     setOpen(!open);
   };
 
-  const playerRef = collection(db, "player");
+  const playerRef = collection(db, "admin");
   const fetchUserData = async () => {
     try {
       const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
@@ -142,6 +145,8 @@ const DashboardContent = () => {
                 >
                   <Bio bioProp={userData.bio} />
                 </Paper>
+                
+               
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
@@ -150,8 +155,17 @@ const DashboardContent = () => {
                 </Paper>
               </Grid>
             </Grid>
+            <Box sx={{ mt: 4, ml: 60 }}>
+            <Link
+              href="/editProfile"
+              underline="none"
+            >
+              <Button variant="contained">Edit Profile </Button>
+            </Link>
+            </Box>
             <Copyright sx={{ pt: 4 }} />
           </Container>
+          
         </Box>
       </Box>
     </ThemeProvider>
