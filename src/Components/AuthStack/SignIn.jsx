@@ -46,13 +46,16 @@ const SignIn = () => {
             src="../../Assets/cricAvatar.jpg"
             sx={{ m: 1, bgcolor: "secondary.main" }}
           />
-          <Typography variant="h4" component="div" gutterBottom>
+          <Typography variant="h4" component="div" gutterBottom data-testid="login header">
             Log In to VCC
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography variant="subtitle1" gutterBottom component="div" data-testid="login subheader">
             Google Sign In
           </Typography>
           <TextField
+            inputProps={{
+              'data-testid': 'email-input'
+            }}
             margin="normal"
             required
             fullWidth
@@ -65,6 +68,9 @@ const SignIn = () => {
           />
           {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
           <TextField
+             inputProps={{
+              "data-testid": "password-field"
+            }}
             margin="normal"
             required
             fullWidth
@@ -76,6 +82,7 @@ const SignIn = () => {
             onChange={(event) => setPassword(event.target.value)}
           />
           <Button
+            data-testid="signin-submit"
             type="submit"
             fullWidth
             variant="contained"
@@ -84,10 +91,10 @@ const SignIn = () => {
           >
             Sign In
           </Button>
-          <Link href="/reset" variant="body2">
+          <Link href="/reset" variant="body2" data-testid="forgot-password">
             Forgot password?
           </Link>
-          <Link href="/register" variant="body2">
+          <Link href="/register" variant="body2" data-testid="sign-up">
             Don't have an account? Sign Up
           </Link>
         </Box>

@@ -50,7 +50,7 @@ const Register = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-          <Typography variant="h4" component="div" gutterBottom>
+          <Typography variant="h4" component="div" gutterBottom data-testid="register header" data-testid="register-header">
             Register for VCC
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
@@ -62,6 +62,7 @@ const Register = () => {
                 name="row-radio-buttons-group"
                 value={accountType}
                 onChange={(event) => setAccountType(event.target.value)}
+                data-testid="acctype"
               >
                 <Grid container>
                   <Grid item xs>
@@ -69,6 +70,7 @@ const Register = () => {
                       value="admin"
                       control={<Radio />}
                       label="ADMIN"
+                      data-testid="adminChoice"
                     />
                   </Grid>
                   <Grid item>
@@ -76,6 +78,7 @@ const Register = () => {
                       value="player"
                       control={<Radio />}
                       label="PLAYER"
+                      data-testid="playerChoice"
                     />
                   </Grid>
                 </Grid>
@@ -92,6 +95,7 @@ const Register = () => {
             id="name"
             autoComplete="name"
             onChange={(event) => setName(event.target.value)}
+            inputProps={{ "data-testid": "name-field" }}
           />
           <TextField
             margin="normal"
@@ -103,6 +107,7 @@ const Register = () => {
             autoComplete="email"
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
+            inputProps={{ "data-testid": "email-field" }}
           />
           {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
           <TextField
@@ -115,6 +120,7 @@ const Register = () => {
             id="password"
             autoComplete="current-password"
             onChange={(event) => setPassword(event.target.value)}
+            inputProps={{ "data-testid": "password-field" }}
           />
           <Button
             type="submit"
@@ -122,6 +128,7 @@ const Register = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => register(name, email, password, accountType)}
+            data-testid ="submit-button"
           >
             Register
           </Button>
