@@ -21,7 +21,7 @@ const theme = createTheme();
 
 const Reset = () => {
   const [email, setEmail] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const history = useHistory();
 
   useEffect(() => {

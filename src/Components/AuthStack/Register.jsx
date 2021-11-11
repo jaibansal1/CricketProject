@@ -29,7 +29,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [accountType, setAccountType] = useState("");
 
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const history = useHistory();
 
   useEffect(() => {

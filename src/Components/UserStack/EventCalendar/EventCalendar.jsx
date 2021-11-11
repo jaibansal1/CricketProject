@@ -29,6 +29,7 @@ import { deepPurple } from "@mui/material/colors";
 import { Text } from "recharts";
 import Cal from "./Cal";
 import Copyright from "../../GlobalComponents/Copyright";
+import Header from "../../GlobalComponents/Header";
 import {
   AppBar,
   Drawer,
@@ -36,6 +37,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../../StyledComponents/StyledComponents";
+import { collection, where, query, getDocs } from "firebase/firestore";
 
 import ApiCalendar from "react-google-calendar-api";
 
@@ -49,74 +51,39 @@ const RosterAdminView = () => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [userData, setUserData] = useState("");
 
   useEffect(() => {
     if (loading) return;
     if (!user) return history.replace("/");
-
-    //  fetchUserData();
+    fetchUserData();
   }, [user, loading]);
 
+  const playerRef = collection(db, "player");
+
+  const fetchUserData = async () => {
+    try {
+      const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setUserData(doc.data());
+      });
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: "24px", // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Vanderbilt Cricket Club Calendar
-            </Typography>
-
-            <Link
-              href="https://calendar.google.com/calendar/u/0/r?cid=group10cricket@gmail.com"
-              underline="none"
-            >
-              <Button variant="contained">Add Event </Button>
-            </Link>
-
-            <Button variant="contained" onClick={logout}>
-              Log Out
-            </Button>
-
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <Text>Opu Poro</Text>
-            <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
-          </Toolbar>
+          <Header
+            openProp={open}
+            titleProp={"VCC Profile"}
+            dataProp={userData}
+            toggleProp={toggleDrawer}
+          />
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
@@ -146,9 +113,6 @@ const RosterAdminView = () => {
             overflow: "auto",
           }}
         >
-          {/* <style>
-              margin-bottom: 50cm;
-          </style> */}
           <Box sx={{ mt: 10, ml: 13 }}>
             <iframe
               src="https://calendar.google.com/calendar/embed?src=group10cricket%40gmail.com&ctz=America%2FChicago"

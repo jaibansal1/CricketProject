@@ -30,7 +30,7 @@ import { collection, where, query, getDocs } from "firebase/firestore";
 const mdTheme = createTheme();
 
 const DashboardContent = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [userData, setUserData] = useState("");
   const history = useHistory();
 

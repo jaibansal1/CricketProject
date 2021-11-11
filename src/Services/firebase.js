@@ -1,27 +1,13 @@
 import { initializeApp } from "firebase/app";
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  getDocs,
-  doc,
-  setDoc,
-  query,
-  where,
-} from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-  onAuthStateChanged,
-  getAdditionalUserInfo,
 } from "firebase/auth";
-
-import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB5wQgqLLDBfeHMua4DU1sGgOCotAVqFFA",
@@ -52,13 +38,13 @@ const signIn = async (email, password) => {
     var errorCode = err.code;
     var errorMessage = err.message;
 
-    if (errorCode == "auth/user-not-found") {
+    if (errorCode === "auth/user-not-found") {
       alert(
         "No user exists with this email address. Try creating a new account!"
       );
-    } else if (errorCode == "auth/invalid-email") {
+    } else if (errorCode === "auth/invalid-email") {
       alert("Please enter a valid email address.");
-    } else if (errorCode == "auth/wrong-password") {
+    } else if (errorCode === "auth/wrong-password") {
       alert("Incorrect Password.");
     } else {
       alert(errorMessage);
@@ -82,15 +68,15 @@ const register = async (name, email, password, accountType) => {
     console.error("Error adding document: ", err);
     var errorCode = err.code;
     var errorMessage = err.message;
-    if (errorCode == "auth/weak-password") {
+    if (errorCode === "auth/weak-password") {
       alert(
         "The password is too weak. Password must be at least 6 characters!"
       );
-    } else if (errorCode == "auth/invalid-email") {
+    } else if (errorCode === "auth/invalid-email") {
       alert("Please enter a valid email address.");
-    } else if (errorCode == "auth/email-already-in-use") {
+    } else if (errorCode === "auth/email-already-in-use") {
       alert("Account already exists with this email.");
-    } else if (errorCode == "auth/missing-email") {
+    } else if (errorCode === "auth/missing-email") {
       alert("Please enter an email address.");
     } else {
       alert(errorMessage);
@@ -107,9 +93,9 @@ const resetPassword = async (email) => {
     console.error(err);
     var errorCode = err.code;
     var errorMessage = err.message;
-    if (errorCode == "auth/invalid-email") {
+    if (errorCode === "auth/invalid-email") {
       alert("Please enter a valid email address.");
-    } else if (errorCode == "auth/user-not-found") {
+    } else if (errorCode === "auth/user-not-found") {
       alert(
         "No user exists with this email address. Try creating a new account!"
       );
@@ -123,15 +109,6 @@ const logout = () => {
   signOut(auth);
 };
 
-// const updateProfile = async (name, grade, role, bat, bowl, bio) => {
-//   db.ref("admin/" + curUser.uid).update({ name: name });
-//   db.ref("admin/" + curUser.uid).update({ grade: grade });
-//   db.ref("admin/" + curUser.uid).update({ role: role });
-//   db.ref("admin/" + curUser.uid).update({ bat: bat });
-//   db.ref("admin/" + curUser.uid).update({ bowl: bowl });
-//   db.ref("admin/" + curUser.uid).update({ bio: bio });
-// };
-
 export {
   auth,
   db,
@@ -140,6 +117,4 @@ export {
   register,
   resetPassword,
   logout,
-  // updateProfile,
-  // writeUserData,
 };

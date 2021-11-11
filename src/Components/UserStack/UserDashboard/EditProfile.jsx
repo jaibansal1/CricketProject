@@ -23,19 +23,17 @@ import {
   getDocs,
   doc,
   updateDoc,
-  setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../../../Services/firebase";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import { Link } from "@mui/material";
 
 // import { updateProfile, writeUserData } from "../../../Services/firebase";
 
 const mdTheme = createTheme();
 
 const FormView = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [userData, setUserData] = useState("");
   const [currentDocId, setCurrentDocID] = useState("");
 
