@@ -1,4 +1,4 @@
-import { initializeApp, } from "firebase/app";
+import { initializeApp } from "firebase/app";
 
 import {
   getFirestore,
@@ -10,7 +10,6 @@ import {
   setDoc,
   query,
   where,
-  
 } from "firebase/firestore";
 import {
   getAuth,
@@ -41,34 +40,30 @@ const signIn = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
 
-    await setDoc(doc(db, "admin", "jx6DwAMWMeUDzWMyMD1V" ), {
-      name: "Abir",
-        grade: "11",
-      role: "hello"
-    },
-      {merge: true
-    })
-  
-
+    // await setDoc(doc(db, "admin", "jx6DwAMWMeUDzWMyMD1V" ), {
+    //   name: "Abir",
+    //     grade: "11",
+    //   role: "hello"
+    // },
+    //   {merge: true
+    // })
   } catch (err) {
     console.error(err);
     var errorCode = err.code;
     var errorMessage = err.message;
 
-    if (errorCode == 'auth/user-not-found') {
-      alert('No user exists with this email address. Try creating a new account!');
-    } 
-    else if (errorCode == 'auth/invalid-email') {
-      alert('Please enter a valid email address.');
-    }
-    else if (errorCode == 'auth/wrong-password') {
-      alert('Incorrect Password.');
-    }
-    else {
+    if (errorCode == "auth/user-not-found") {
+      alert(
+        "No user exists with this email address. Try creating a new account!"
+      );
+    } else if (errorCode == "auth/invalid-email") {
+      alert("Please enter a valid email address.");
+    } else if (errorCode == "auth/wrong-password") {
+      alert("Incorrect Password.");
+    } else {
       alert(errorMessage);
     }
     console.log(err);
-    // alert(err.message);
   }
 };
 
@@ -87,19 +82,17 @@ const register = async (name, email, password, accountType) => {
     console.error("Error adding document: ", err);
     var errorCode = err.code;
     var errorMessage = err.message;
-    if (errorCode == 'auth/weak-password') {
-      alert('The password is too weak. Password must be at least 6 characters!');
-    } 
-    else if (errorCode == 'auth/invalid-email') {
-      alert('Please enter a valid email address.');
-    }
-    else if (errorCode == 'auth/email-already-in-use') {
-      alert('Account already exists with this email.');
-    }
-    else if (errorCode == 'auth/missing-email') {
-      alert('Please enter an email address.');
-    }
-    else {
+    if (errorCode == "auth/weak-password") {
+      alert(
+        "The password is too weak. Password must be at least 6 characters!"
+      );
+    } else if (errorCode == "auth/invalid-email") {
+      alert("Please enter a valid email address.");
+    } else if (errorCode == "auth/email-already-in-use") {
+      alert("Account already exists with this email.");
+    } else if (errorCode == "auth/missing-email") {
+      alert("Please enter an email address.");
+    } else {
       alert(errorMessage);
     }
     console.log(err);
@@ -114,14 +107,14 @@ const resetPassword = async (email) => {
     console.error(err);
     var errorCode = err.code;
     var errorMessage = err.message;
-    if (errorCode == 'auth/invalid-email') {
-      alert('Please enter a valid email address.');
-    }
-    else if (errorCode == 'auth/user-not-found') {
-      alert('No user exists with this email address. Try creating a new account!');
-    }
-    else {
-      alert(err.message);
+    if (errorCode == "auth/invalid-email") {
+      alert("Please enter a valid email address.");
+    } else if (errorCode == "auth/user-not-found") {
+      alert(
+        "No user exists with this email address. Try creating a new account!"
+      );
+    } else {
+      alert(errorMessage);
     }
   }
 };
@@ -130,30 +123,14 @@ const logout = () => {
   signOut(auth);
 };
 
-const updateProfile = async (name, grade, role, bat, bowl, bio) => {
-  var curUser = auth.currentUser;
-  db.ref("admin/"+curUser.uid).update({ name: name });
-  db.ref("admin/"+curUser.uid).update({ grade: grade });
-  db.ref("admin/"+curUser.uid).update({ role: role });
-  db.ref("admin/"+curUser.uid).update({ bat: bat });
-  db.ref("admin/"+curUser.uid).update({ bowl: bowl });
-  db.ref("admin/"+curUser.uid).update({ bio: bio });
-}
- 
-const writeUserData = async (name, grade, role, bat, bowl, bio) => {
-  await setDoc(doc(db, "admin", "jx6DwAMWMeUDzWMyMD1V" ),  {
-    name: name,
-    grade: grade,
-    role: role,
-    bat: bat,
-    bowl: bowl,
-    bio, bio,
-    },
-    {merge: true}
-    );
-    
-}
-  
+// const updateProfile = async (name, grade, role, bat, bowl, bio) => {
+//   db.ref("admin/" + curUser.uid).update({ name: name });
+//   db.ref("admin/" + curUser.uid).update({ grade: grade });
+//   db.ref("admin/" + curUser.uid).update({ role: role });
+//   db.ref("admin/" + curUser.uid).update({ bat: bat });
+//   db.ref("admin/" + curUser.uid).update({ bowl: bowl });
+//   db.ref("admin/" + curUser.uid).update({ bio: bio });
+// };
 
 export {
   auth,
@@ -163,6 +140,6 @@ export {
   register,
   resetPassword,
   logout,
-  updateProfile,
-  writeUserData,
+  // updateProfile,
+  // writeUserData,
 };

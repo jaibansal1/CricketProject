@@ -10,7 +10,7 @@ import AdminDashboard from "./Components/UserStack/AdminDashboard/AdminDashboard
 import EventCalendar from "./Components/UserStack/EventCalendar/EventCalendar";
 import UserDashboard from "./Components/UserStack/UserDashboard/UserDashboard";
 import UserProfile from "./Components/UserStack/UserProfile/UserProfile";
-import EditProfile from "./Components/UserStack/UserDashboard/EditProfile"
+import EditProfile from "./Components/UserStack/UserDashboard/EditProfile";
 
 const App = () => {
   return (
