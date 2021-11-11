@@ -10,6 +10,7 @@ import AdminDashboard from "./Components/UserStack/AdminDashboard/AdminDashboard
 import EventCalendar from "./Components/UserStack/EventCalendar/EventCalendar";
 import UserDashboard from "./Components/UserStack/UserDashboard/UserDashboard";
 import UserProfile from "./Components/UserStack/UserProfile/UserProfile";
+import EditProfile from "./Components/UserStack/UserDashboard/EditProfile";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/userDashboard" component={UserDashboard} />
           <Route exact path="/adminDashboard" component={AdminDashboard} />
           <Route exact path="/eventCalendar" component={EventCalendar} />
+          <Route exact path="/editProfile" component={EditProfile} />
         </Switch>
       </Router>
     </div>

@@ -5,7 +5,6 @@ import { auth, register } from "../../Services/firebase";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -20,7 +19,8 @@ import Copyright from "../GlobalComponents/Copyright";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 
-import SignIn from "./SignIn";
+import cricAvatar from "../../Assets/cricAvatar.jpeg";
+
 const theme = createTheme();
 
 const Register = () => {
@@ -40,7 +40,6 @@ const Register = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -49,7 +48,10 @@ const Register = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+          <Avatar
+            src={cricAvatar}
+            sx={{ m: 1, bgcolor: "secondary.main", width: 100, height: 100 }}
+          />
           <Typography variant="h4" component="div" gutterBottom>
             Register for VCC
           </Typography>
@@ -104,7 +106,11 @@ const Register = () => {
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
           />
-          {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
+          {email && !/\S+@\S+\.\S+/.test(email) && (
+            <span className="error" data-testid="error-msg">
+              Please enter a valid email.
+            </span>
+          )}
           <TextField
             margin="normal"
             required
@@ -126,7 +132,7 @@ const Register = () => {
             Register
           </Button>
           <div>
-             <Link to="/">Sign In</Link> with existing account.
+            <Link to="/">Sign In</Link> with existing account.
           </div>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

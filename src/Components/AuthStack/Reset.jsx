@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -13,17 +13,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Copyright from "../GlobalComponents/Copyright";
 
-import SignIn from "./SignIn";
+import cricAvatar from "../../Assets/cricAvatar.jpeg";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { useAuth } from "../../Providers/AuthProvider";
 
 const theme = createTheme();
 
 const Reset = () => {
   const [email, setEmail] = useState("");
   const [user, loading, error] = useAuthState(auth);
-  // const { resetPassword } = useAuth();
   const history = useHistory();
 
   useEffect(() => {
@@ -43,7 +41,10 @@ const Reset = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+          <Avatar
+            src={cricAvatar}
+            sx={{ m: 1, bgcolor: "secondary.main", width: 100, height: 100 }}
+          />
           <Typography variant="h4" component="div" gutterBottom>
             Forgot Password?
           </Typography>
@@ -61,7 +62,11 @@ const Reset = () => {
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
           />
-          {email && !(/\S+@\S+\.\S+/).test(email) && <span className="error" data-testid="error-msg">Please enter a valid email.</span>}
+          {email && !/\S+@\S+\.\S+/.test(email) && (
+            <span className="error" data-testid="error-msg">
+              Please enter a valid email.
+            </span>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -75,7 +80,7 @@ const Reset = () => {
             Don't have an account? <Link to="/register">Register</Link> now.
           </div>
           <div>
-             <Link to="/">Sign In</Link> now.
+            <Link to="/">Sign In</Link> now.
           </div>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Box>

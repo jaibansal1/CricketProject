@@ -3,7 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -19,11 +18,15 @@ import Bio from "./Bio";
 import Info from "./Info";
 import Stats from "./Stats";
 import Copyright from "../../GlobalComponents/Copyright";
+import Header from "../../GlobalComponents/Header";
 import { Drawer, AppBar } from "../../StyledComponents/StyledComponents";
+
+import { Link } from "@mui/material";
+import { Button } from "@mui/material";
 
 import { auth, db } from "../../../Services/firebase";
 import { collection, where, query, getDocs } from "firebase/firestore";
-import Header from "../../GlobalComponents/Header";
+
 const mdTheme = createTheme();
 
 const DashboardContent = () => {
@@ -48,7 +51,6 @@ const DashboardContent = () => {
       const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         setUserData(doc.data());
       });
     } catch (err) {
@@ -59,7 +61,6 @@ const DashboardContent = () => {
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
-        <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Header
             openProp={open}
@@ -125,7 +126,7 @@ const DashboardContent = () => {
                   }}
                 >
                   <Info
-                    yearProp={userData.year}
+                    yearProp={userData.grade}
                     batProp={userData.bat}
                     bowlProp={userData.bowl}
                   />
@@ -142,6 +143,13 @@ const DashboardContent = () => {
                 >
                   <Bio bioProp={userData.bio} />
                 </Paper>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Link href="/editProfile" underline="none">
+                  <Button variant="contained" display="alignItems: center">
+                    Edit Profile
+                  </Button>
+                </Link>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
