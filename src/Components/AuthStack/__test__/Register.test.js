@@ -39,11 +39,11 @@ describe ('Register General Tests', ()=>{
     // test presence of correct welcome text
     test('has correct welcome text', () => {
         render(<Register></Register>);
-        expect(screen.getByTestId('signup-header')).toHaveTextContent('Register for VCC');
+        expect(screen.getByTestId('register-header')).toHaveTextContent('Register for VCC');
     })
 })
 
-describe ('SignUp Email Tests', ()=>{
+describe ('Register Email Tests', ()=>{
     
     // Test email input field exists
     test('Email input exists', ()=>{
@@ -93,7 +93,7 @@ describe ('SignUp Email Tests', ()=>{
     
 })
 
-describe ('SignUp Password Tests', ()=>{
+describe ('Register Password Tests', ()=>{
 
     // Test password input field exists
     test('Password input exists', () => {
@@ -126,7 +126,7 @@ test('Copyright link goes to website', () => {
 
 })
 
-describe ('SignUp Radio Button Admin/Player Tests', () => {
+describe ('Register Radio Button Admin/Player Tests', () => {
     test ("click button and change state", ()=>{ 
         render(<Register></Register>);
         const buttonEl = screen.getByTestId("adminChoice");

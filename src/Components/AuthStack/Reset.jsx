@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from "@mui/material/Link";
+
 import { auth, resetPassword } from "../../Services/firebase";
 
 import Avatar from "@mui/material/Avatar";
@@ -44,13 +46,16 @@ const Reset = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-          <Typography variant="h4" component="div" gutterBottom>
+          <Typography variant="h4" component="div" gutterBottom data-testid="reset-header">
             Forgot Password?
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
+          <Typography variant="subtitle1" gutterBottom component="div" data-testid="reset-subheader">
             Enter your email below
           </Typography>
           <TextField
+            inputProps={{
+              "data-testid": "email-input"
+            }}
             margin="normal"
             required
             fullWidth
@@ -68,6 +73,7 @@ const Reset = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={() => resetPassword(email)}
+            data-testid="reset-submit"
           >
             Reset Password
           </Button>
