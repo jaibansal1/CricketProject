@@ -40,6 +40,16 @@ const db = getFirestore(app);
 const signIn = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+
+    await setDoc(doc(db, "admin", "jx6DwAMWMeUDzWMyMD1V" ), {
+      name: "Abir",
+        grade: "11",
+      role: "hello"
+    },
+      {merge: true
+    })
+  
+
   } catch (err) {
     console.error(err);
     var errorCode = err.code;
@@ -131,16 +141,15 @@ const updateProfile = async (name, grade, role, bat, bowl, bio) => {
 }
  
 const writeUserData = async (name, grade, role, bat, bowl, bio) => {
-  await setDoc(doc(db, "admin", "K1SPd78rMCfbmy5UFCPB" ),  {
+  await setDoc(doc(db, "admin", "jx6DwAMWMeUDzWMyMD1V" ),  {
     name: name,
-      grade: grade,
+    grade: grade,
     role: role,
     bat: bat,
     bowl: bowl,
     bio, bio,
     },
     {merge: true}
-    
     );
     
 }

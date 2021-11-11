@@ -128,7 +128,7 @@ const DashboardContent = () => {
                   }}
                 >
                   <Info
-                    yearProp={userData.year}
+                    yearProp={userData.grade}
                     batProp={userData.bat}
                     bowlProp={userData.bowl}
                   />
