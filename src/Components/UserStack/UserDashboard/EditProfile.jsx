@@ -9,7 +9,6 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
-
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "../../GlobalComponents/listItems";
 
@@ -24,11 +23,11 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 import { auth, db } from "../../../Services/firebase";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-
-// import { updateProfile, writeUserData } from "../../../Services/firebase";
 
 const mdTheme = createTheme();
 
@@ -43,8 +42,12 @@ const FormView = () => {
   const [grade, setGrade] = useState("");
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
 
   const history = useHistory();
+
+  const storage = getStorage();
+  const storageRef = ref(storage, currentDocId);
 
   useEffect(() => {
     if (loading) return;
@@ -70,6 +73,7 @@ const FormView = () => {
         setGrade(doc.data().grade);
         setRole(doc.data().role);
         setName(doc.data().name);
+        setImage(doc.data().image);
         setCurrentDocID(doc.id);
       });
     } catch (err) {
@@ -82,6 +86,9 @@ const FormView = () => {
     try {
       const docRef = doc(db, "player", currentDocId);
       console.log(name, grade, role, bat, bowl, bio);
+      uploadBytes(storageRef, image).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      });
       await updateDoc(docRef, {
         name: name,
         grade: grade,
@@ -89,6 +96,7 @@ const FormView = () => {
         bat: bat,
         bowl: bowl,
         bio: bio,
+        image: image,
       });
       history.replace("/userProfile");
     } catch (err) {
@@ -96,6 +104,8 @@ const FormView = () => {
       alert("An error occured while updating user data");
     }
   };
+
+  const onImageChange = async (e) => {};
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -131,13 +141,44 @@ const FormView = () => {
               theme.palette.mode === "light"
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
-            flexGrow: 1,
             height: "100vh",
             overflow: "auto",
+            alignItems: "center",
+            flexDirections: "column",
           }}
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <div>
+              {image && (
+                <div>
+                  <img
+                    alt="not found"
+                    width={"250px"}
+                    style={{
+                      verticalAlign: "middle",
+                      width: "150px",
+                      height: "150px",
+                      borderRadius: "50%",
+                    }}
+                    src={image}
+                  />
+                  <br />
+                  <button onClick={() => setImage(null)}>Remove</button>
+                </div>
+              )}
+              <br />
+              <br />
+              <input
+                type="file"
+                name="myImage"
+                onChange={(event) => {
+                  console.log(event.target.files[0]);
+                  setImage(event.target.files[0]);
+                }}
+              />
+            </div>
+
             <TextField
               multiline
               InputLabelProps={{ shrink: true }}
