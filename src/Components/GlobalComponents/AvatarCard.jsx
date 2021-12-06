@@ -3,6 +3,7 @@ import Title from "./Title";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
+import { Link } from "@mui/material";
 
 const AvatarCard = (props) => {
   return (
@@ -18,7 +19,9 @@ const AvatarCard = (props) => {
         src={props.imageProp}
       ></Avatar>
       <Box sx={{ mx: "auto", my: 0.6 }}>
-        <Title>{props.nameProp}</Title>
+        <Link href="/viewProfile" underline="hover">
+          <Title>{props.nameProp}</Title>
+        </Link>
       </Box>
       <Box sx={{ mx: "auto", my: 0.6 }}>
         <Title>{props.roleProp}</Title>
