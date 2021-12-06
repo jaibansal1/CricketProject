@@ -28,6 +28,24 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [accountType, setAccountType] = useState("");
+  const [t20Innings, setT20Innings] = useState(0);
+  const [t20Average, setT20Average] = useState(0);
+  const [t20Runs, setT20Runs] = useState(0);
+  const [t20HS, setT20HS] = useState(0);
+  const [t12Innings, setT12Innings] = useState(0);
+  const [t12Average, setT12Average] = useState(0);
+  const [t12Runs, setT12Runs] = useState(0);
+  const [t12HS, setT12HS] = useState(0);
+  const [practiceInnings, setPracticeInnings] = useState(0);
+  const [practiceAverage, setPracticeAverage] = useState(0);
+  const [practiceRuns, setPracticeRuns] = useState(0);
+  const [practiceHS, setPracticeHS] = useState(0);
+  const [bat, setBat] = useState("");
+  const [bio, setBio] = useState("");
+  const [bowl, setBowl] = useState("");
+  const [grade, setGrade] = useState("");
+  const [role, setRole] = useState("");
+  const [image, setImage] = useState("");
 
   const [user, loading] = useAuthState(auth);
   const history = useHistory();
@@ -127,7 +145,32 @@ const Register = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => register(name, email, password, accountType)}
+            onClick={() =>
+              register(
+                name,
+                email,
+                accountType,
+                password,
+                t20Innings,
+                t20Runs,
+                t20Average,
+                t20HS,
+                t12Innings,
+                t12Runs,
+                t12Average,
+                t12HS,
+                practiceInnings,
+                practiceRuns,
+                practiceAverage,
+                practiceHS,
+                bat,
+                bowl,
+                grade,
+                image,
+                bio,
+                role
+              )
+            }
           >
             Register
           </Button>

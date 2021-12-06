@@ -16,7 +16,6 @@ import EditStats from "./Components/UserStack/UserProfile/EditStats";
 
 import PlayerProfile from "./Components/UserStack/UserProfile/PlayerProfile";
 
-
 const App = () => {
   return (
     <div>
@@ -31,10 +30,9 @@ const App = () => {
           <Route exact path="/eventCalendar" component={EventCalendar} />
           <Route exact path="/editProfile" component={EditProfile} />
 
-          <Route exact path="/editStats" component = {EditStats} />
+          <Route exact path="/editStats" component={EditStats} />
 
           <Route exact path="/viewProfile/:uid" component={PlayerProfile} />
-
         </Switch>
       </Router>
     </div>

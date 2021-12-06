@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import { useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -23,6 +22,7 @@ import { Drawer, AppBar } from "../../StyledComponents/StyledComponents";
 
 import { auth, db } from "../../../Services/firebase";
 import { collection, where, query, getDocs } from "firebase/firestore";
+import ViewStats from "./ViewStats";
 
 const mdTheme = createTheme();
 
@@ -147,7 +147,7 @@ const PlayerProfile = (props) => {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Stats statProp={userData.matches} />
+                  <ViewStats uidProp={uid} />
                 </Paper>
               </Grid>
             </Grid>

@@ -53,7 +53,30 @@ const signIn = async (email, password) => {
   }
 };
 
-const register = async (name, email, password, accountType) => {
+const register = async (
+  name,
+  email,
+  accountType,
+  password,
+  t20Innings,
+  t20Runs,
+  t20Average,
+  t20HS,
+  t12Innings,
+  t12Runs,
+  t12Average,
+  t12HS,
+  PracticeInnings,
+  PracticeRuns,
+  PracticeAverage,
+  PracticeHS,
+  bat,
+  bowl,
+  grade,
+  image,
+  bio,
+  role
+) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
@@ -62,6 +85,24 @@ const register = async (name, email, password, accountType) => {
       name,
       email,
       accountType,
+      t20Innings,
+      t20Runs,
+      t20Average,
+      t20HS,
+      t12Innings,
+      t12Runs,
+      t12Average,
+      t12HS,
+      PracticeInnings,
+      PracticeRuns,
+      PracticeAverage,
+      PracticeHS,
+      bat,
+      bowl,
+      grade,
+      image,
+      bio,
+      role,
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (err) {
