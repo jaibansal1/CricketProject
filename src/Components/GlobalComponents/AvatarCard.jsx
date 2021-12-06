@@ -15,6 +15,7 @@ const AvatarCard = (props) => {
           my: 3,
           gcolor: deepPurple[500],
         }}
+        src={props.imageProp}
       ></Avatar>
       <Box sx={{ mx: "auto", my: 0.6 }}>
         <Title>{props.nameProp}</Title>

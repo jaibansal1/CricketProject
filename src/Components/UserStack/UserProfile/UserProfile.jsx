@@ -113,6 +113,7 @@ const DashboardContent = () => {
                   <AvatarCard
                     nameProp={userData.name}
                     roleProp={userData.role}
+                    imageProp={userData.image}
                   />
                 </Paper>
               </Grid>

@@ -23,7 +23,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import { auth, db } from "../../../Services/firebase";
 import { TextField } from "@mui/material";
@@ -42,12 +42,30 @@ const FormView = () => {
   const [grade, setGrade] = useState("");
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
-  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
-  const history = useHistory();
-
+  //root reference
   const storage = getStorage();
-  const storageRef = ref(storage, currentDocId);
+
+  const handleChange = (e) => {
+    setImageFile(e.target.files[0]);
+  };
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    //reference to currrent document id
+    const storageRef = ref(storage, `/images/${imageFile.name}`);
+    uploadBytes(storageRef, imageFile).then((snapshot) => {
+      getDownloadURL(storageRef).then((url) => {
+        setImageFile(null);
+        setImageUrl(url);
+      });
+      console.log("Uploaded a blob or file!");
+    });
+    console.log(imageFile, imageUrl);
+  };
+  const history = useHistory();
 
   useEffect(() => {
     if (loading) return;
@@ -73,7 +91,7 @@ const FormView = () => {
         setGrade(doc.data().grade);
         setRole(doc.data().role);
         setName(doc.data().name);
-        setImage(doc.data().image);
+        setImageUrl(doc.data().image);
         setCurrentDocID(doc.id);
       });
     } catch (err) {
@@ -82,13 +100,11 @@ const FormView = () => {
     }
   };
 
-  const writeUserData = async (name, grade, role, bat, bowl, bio) => {
+  const writeUserData = async (name, grade, role, bat, bowl, bio, imageUrl) => {
     try {
       const docRef = doc(db, "player", currentDocId);
       console.log(name, grade, role, bat, bowl, bio);
-      uploadBytes(storageRef, image).then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      });
+
       await updateDoc(docRef, {
         name: name,
         grade: grade,
@@ -96,7 +112,7 @@ const FormView = () => {
         bat: bat,
         bowl: bowl,
         bio: bio,
-        image: image,
+        image: imageUrl,
       });
       history.replace("/userProfile");
     } catch (err) {
@@ -105,8 +121,31 @@ const FormView = () => {
     }
   };
 
-  const onImageChange = async (e) => {};
+  const getImage = async () => {
+    getDownloadURL(
+      ref(storage, `/images/${imageFile.name}`)
+        .then((url) => {
+          // `url` is the download URL for 'images/stars.jpg'
 
+          // This can be downloaded directly:
+          // const xhr = new XMLHttpRequest();
+          // xhr.responseType = "blob";
+          // xhr.onload = (event) => {
+          //   const blob = xhr.response;
+          // };
+          // xhr.open("GET", url);
+          // xhr.send();
+
+          // Or inserted into an <img> element
+          const img = document.getElementById("avatar");
+          img.setAttribute("src", url);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.log(error);
+        })
+    );
+  };
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -150,32 +189,20 @@ const FormView = () => {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <div>
-              {image && (
-                <div>
-                  <img
-                    alt="not found"
-                    width={"250px"}
-                    style={{
-                      verticalAlign: "middle",
-                      width: "150px",
-                      height: "150px",
-                      borderRadius: "50%",
-                    }}
-                    src={image}
-                  />
-                  <br />
-                  <button onClick={() => setImage(null)}>Remove</button>
-                </div>
-              )}
-              <br />
-              <br />
-              <input
-                type="file"
-                name="myImage"
-                onChange={(event) => {
-                  console.log(event.target.files[0]);
-                  setImage(event.target.files[0]);
+              <form onSubmit={handleUpload}>
+                <input type="file" onChange={handleChange} />
+                <button disabled={!imageFile}>Upload Avatar</button>
+              </form>
+              <img
+                src={imageUrl}
+                style={{
+                  verticalAlign: "middle",
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
                 }}
+                id="avatar"
+                alt="avatar"
               />
             </div>
 
@@ -258,7 +285,9 @@ const FormView = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => writeUserData(name, grade, role, bat, bowl, bio)}
+              onClick={() =>
+                writeUserData(name, grade, role, bat, bowl, bio, imageUrl)
+              }
             >
               Save
             </Button>

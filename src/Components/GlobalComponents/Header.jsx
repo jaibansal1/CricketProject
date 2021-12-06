@@ -63,7 +63,10 @@ const Header = (props) => {
         </Badge>
       </IconButton>
       <Text>{props.dataProp.name}</Text>
-      <Avatar sx={{ bgcolor: deepPurple[500] }}></Avatar>
+      <Avatar
+        sx={{ bgcolor: deepPurple[500] }}
+        src={props.dataProp.image}
+      ></Avatar>
     </Toolbar>
   );
 };
