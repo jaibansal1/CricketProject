@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
-import { useLocation } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -27,9 +26,10 @@ import { collection, where, query, getDocs } from "firebase/firestore";
 
 const mdTheme = createTheme();
 
-const RosterContent = () => {
+const PlayerProfile = (props) => {
   const [user, loading] = useAuthState(auth);
   const [userData, setUserData] = useState("");
+  const uid = window.location.href.split("/")[4];
   const history = useHistory();
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const RosterContent = () => {
   const playerRef = collection(db, "player");
   const fetchUserData = async () => {
     try {
-      const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
+      const q = query(playerRef, where("uid", "==", uid));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUserData(doc.data());
@@ -157,10 +157,6 @@ const RosterContent = () => {
       </Box>
     </ThemeProvider>
   );
-};
-
-const PlayerProfile = () => {
-  return <RosterContent />;
 };
 
 export default PlayerProfile;

@@ -19,7 +19,11 @@ const AvatarCard = (props) => {
         src={props.imageProp}
       ></Avatar>
       <Box sx={{ mx: "auto", my: 0.6 }}>
-        <Link href="/viewProfile" underline="hover">
+        <Link
+          to={`/viewProfile/${props.idProp}`}
+          href={`/viewProfile/${props.idProp}`}
+          underline="hover"
+        >
           <Title>{props.nameProp}</Title>
         </Link>
       </Box>

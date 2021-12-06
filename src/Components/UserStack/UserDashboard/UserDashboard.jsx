@@ -53,7 +53,7 @@ const RosterUserView = () => {
           doc.data().name,
           doc.data().role,
           doc.data().image,
-          doc.data().id,
+          doc.data().uid,
         ]);
       });
       console.log(arrayData);
