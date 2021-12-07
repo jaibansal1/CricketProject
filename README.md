@@ -19,7 +19,7 @@ Run "npm install" to install any relevant packages and npm start to test the app
 
 For deployment via Firebase Hosting, run "npm run build" and "firebase deploy"
 
-[cricket-project-69765.web.app](url)
+https://cricket-project-69765.web.app/
 
 **Technologies**: 
 
