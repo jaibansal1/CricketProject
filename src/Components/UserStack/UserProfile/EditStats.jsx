@@ -127,7 +127,7 @@ const FormView = () => {
 
         let newHS = parseInt(userData.t20HS);
         if (runs > newHS) {
-            newHS = runs;
+            newHS = parseInt(runs);
         }
 
         // setNewInnings(userData.t20Innings + 1);
@@ -148,10 +148,10 @@ const FormView = () => {
         
 
           await updateDoc(docRef, {
-            t20Innings: newInnings,
-            t20Runs: newRuns,
-            t20Average: newAverage,
-            t20HS: newHS,
+            t20Innings: parseInt(newInnings),
+            t20Runs: parseInt(newRuns),
+            t20Average: parseFloat(newAverage),
+            t20HS: parseInt(newHS),
           });
       }
 
@@ -177,10 +177,10 @@ const FormView = () => {
 
 
           await updateDoc(docRef, {
-            t12Innings: newInnings,
-            t12Runs: newRuns,
-            t12Average: newAverage,
-            t12HS: newHS,
+            t12Innings: parseInt(newInnings),
+            t12Runs: parseInt(newRuns),
+            t12Average: parseFloat(newAverage),
+            t12HS: parseInt(newHS),
           });
       }
       if (matchType === "Practice") {
@@ -204,10 +204,10 @@ const FormView = () => {
         }
 
           await updateDoc(docRef, {
-            PracticeInnings: newInnings,
-            PracticeRuns: newRuns,
-            PracticeAverage: newAverage,
-            PracticeHS: newHS,
+            PracticeInnings: parseInt(newInnings),
+            PracticeRuns: parseInt(newRuns),
+            PracticeAverage: parseFloat(newAverage),
+            PracticeHS: parseInt(newHS),
           });
       }
     //   await updateDoc(docRef, {
