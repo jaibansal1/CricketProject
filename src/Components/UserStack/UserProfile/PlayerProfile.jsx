@@ -31,6 +31,7 @@ const PlayerProfile = (props) => {
   const [userData, setUserData] = useState("");
   const uid = window.location.href.split("/")[4];
   const history = useHistory();
+  const [curUserData, setCurUserData] = useState("");
 
   useEffect(() => {
     if (loading) return;
@@ -56,6 +57,20 @@ const PlayerProfile = (props) => {
       alert("An error occured while fetching user data");
     }
   };
+
+  const fetchCurUserData = async () => {
+    try {
+      const q = query(playerRef, where("uid", "==", auth.currentUser.uid));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setCurUserData(doc.data());
+      });
+    }catch (err) {
+        console.error(err);
+        alert("An error occured while fetching user data");
+      }
+  };
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
@@ -63,7 +78,7 @@ const PlayerProfile = (props) => {
           <Header
             openProp={open}
             titleProp={"VCC Profile"}
-            dataProp={userData}
+            dataProp={curUserData}
             toggleProp={toggleDrawer}
           />
         </AppBar>
