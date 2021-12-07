@@ -80,7 +80,7 @@ const RosterAdminView = () => {
         <AppBar position="absolute" open={open}>
           <Header
             openProp={open}
-            titleProp={"VCC Profile"}
+            titleProp={"VCC Calendar"}
             dataProp={userData}
             toggleProp={toggleDrawer}
           />
