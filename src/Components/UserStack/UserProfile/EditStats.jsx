@@ -125,7 +125,7 @@ const FormView = () => {
         let newRuns = parseInt(userData.t20Runs) + parseInt(runs);
         let newAverage = (newRuns / newInnings);
 
-        let newHS = userData.t20HS;
+        let newHS = parseInt(userData.t20HS);
         if (runs > newHS) {
             newHS = runs;
         }
@@ -170,7 +170,7 @@ const FormView = () => {
         let newRuns = parseInt(userData.t12Runs) + parseInt(runs);
         let newAverage = (newRuns / newInnings);
 
-        let newHS = userData.t12HS;
+        let newHS = parseInt(userData.t12HS);
         if (runs > newHS) {
             newHS = runs;
         }
@@ -198,7 +198,7 @@ const FormView = () => {
         let newRuns = parseInt(userData.PracticeRuns) + parseInt(runs);
         let newAverage = (newRuns / newInnings);
 
-        let newHS = userData.PracticeHS;
+        let newHS = parseInt(userData.PracticeHS);
         if (runs > newHS) {
             newHS = runs;
         }

@@ -48,7 +48,6 @@ const SignIn = () => {
           <Typography variant="h4" component="div" gutterBottom>
             Log In to VCC
           </Typography>
-
           <TextField
             margin="normal"
             required
