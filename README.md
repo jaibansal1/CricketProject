@@ -9,6 +9,10 @@
 
 * Users will have functionality to access upcoming team events and view their team’s statistics. This will include features such as joining a team, responding to events, seeing a calendar with all upcoming events, and viewing team statistics. 
 
+**Installation**: Run npm install to install any relevant packages and npm start to test the app locally
+
+**Deployment**: For deployment via Firebase Hosting, run npm run build and firebase deploy
+
 **Technologies**: We will deploy our web application using Firebase Hosting and use Firebase Firestore as our database. For languages, we will primarily rely on Javascript, HTML, and CSS, as well as web application-oriented libraries and frameworks such as Bootstrap and ReactJS. We will also leverage external APIs such as Firebase or Twilio to provide  notification/communication capabilities. 
 
 **Design Prototypes**:
