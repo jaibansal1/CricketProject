@@ -48,9 +48,7 @@ const SignIn = () => {
           <Typography variant="h4" component="div" gutterBottom>
             Log In to VCC
           </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Google Sign In
-          </Typography>
+
           <TextField
             margin="normal"
             required
