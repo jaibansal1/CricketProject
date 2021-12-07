@@ -127,9 +127,9 @@ const DashboardContent = () => {
                   }}
                 >
                   <Info
-                    yearProp={userData.grade}
-                    batProp={userData.bat}
-                    bowlProp={userData.bowl}
+                    yearProp={"Grade: " + userData.grade}
+                    batProp={"Bats: " + userData.bat}
+                    bowlProp={"Bowls " + userData.bowl}
                   />
                 </Paper>
               </Grid>
