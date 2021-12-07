@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "../../GlobalComponents/listItems";
 import AvatarCard from "../../GlobalComponents/AvatarCard";
+import PersonalAvatarCard from "../../GlobalComponents/PersonalAvatarCard";
 import Bio from "./Bio";
 import Info from "./Info";
 import Stats from "./Stats";
@@ -110,7 +111,7 @@ const DashboardContent = () => {
                     height: 240,
                   }}
                 >
-                  <AvatarCard
+                  <PersonalAvatarCard
                     nameProp={userData.name}
                     roleProp={userData.role}
                     imageProp={userData.image}
